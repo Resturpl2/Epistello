@@ -4,19 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Epistello | Aplikasi Catatan Premium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
     }
 
     body {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-      color: #f8fafc;
+      background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
+      color: #f0f0f0;
       min-height: 100vh;
       padding: 20px;
+      letter-spacing: -0.01em;
+      line-height: 1.6;
     }
 
     .container {
@@ -41,7 +46,7 @@
     .logo-icon {
       width: 40px;
       height: 40px;
-      background: linear-gradient(135deg, #0057FF 0%, #7CECF4 100%);
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
       border-radius: 10px;
       display: flex;
       align-items: center;
@@ -49,28 +54,139 @@
       color: white;
       font-weight: bold;
       font-size: 20px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
     }
 
     h1 {
       font-size: 32px;
       font-weight: 700;
-      color: #f8fafc;
-      letter-spacing: -0.5px;
+      color: #ffffff;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-family: 'Poppins', sans-serif;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     .subtitle {
       color: #94a3b8;
       font-size: 18px;
-      font-weight: 400;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .motivation-banner {
+      background: linear-gradient(90deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+      border-radius: 12px;
+      padding: 15px;
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .motivation-banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+      to {
+        left: 100%;
+      }
+    }
+
+    .motivation-text {
+      flex: 1;
+      font-size: 14px;
+      font-weight: 500;
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.01em;
+    }
+
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: rgba(30, 41, 59, 0.3);
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #6366f1, #8b5cf6, transparent);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(99, 102, 241, 0.3);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 5px;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
     }
 
     .input-section {
-      background: rgba(30, 41, 59, 0.7);
+      background: rgba(30, 41, 59, 0.2);
       border-radius: 16px;
       padding: 24px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
       margin-bottom: 30px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(10px);
     }
 
@@ -83,23 +199,58 @@
       outline: none;
       margin-bottom: 16px;
       font-size: 16px;
-      background: rgba(15, 23, 42, 0.8);
-      color: #f8fafc;
+      background: rgba(15, 23, 42, 0.4);
+      color: #f0f0f0;
       resize: none;
       transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.5;
+      letter-spacing: 0.01em;
     }
 
     textarea:focus {
-      border-color: #0057FF;
-      box-shadow: 0 0 0 3px rgba(0, 87, 255, 0.2);
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
     }
 
     textarea::placeholder {
       color: #64748b;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+    }
+
+    .features-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+
+    .feature-btn {
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 12px;
+      color: #cbd5e1;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .feature-btn:hover {
+      background: rgba(99, 102, 241, 0.1);
+      border-color: rgba(99, 102, 241, 0.3);
+      color: #a5b4fc;
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #0057FF 0%, #3b82f6 100%);
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
       color: white;
       border: none;
       border-radius: 12px;
@@ -112,13 +263,32 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 4px 12px rgba(0, 87, 255, 0.3);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
       width: 100%;
+      position: relative;
+      overflow: hidden;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: 0.5s;
+    }
+
+    .btn-primary:hover::before {
+      left: 100%;
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0, 87, 255, 0.4);
+      box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3);
     }
 
     .btn-primary:active {
@@ -138,16 +308,47 @@
       font-size: 24px;
       font-weight: 600;
       color: #f8fafc;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    .filter-options {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .filter-btn {
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 12px;
+      color: #94a3b8;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      color: white;
+      border-color: transparent;
+      font-weight: 600;
     }
 
     .notes-count {
-      background: rgba(15, 23, 42, 0.8);
+      background: rgba(15, 23, 42, 0.4);
       color: #94a3b8;
       padding: 6px 12px;
       border-radius: 20px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.02em;
     }
 
     .notes-list {
@@ -156,16 +357,36 @@
     }
 
     .note {
-      background: rgba(30, 41, 59, 0.7);
+      background: rgba(30, 41, 59, 0.2);
       border-radius: 16px;
       padding: 20px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
       backdrop-filter: blur(10px);
       animation: slideIn 0.4s ease-out;
+    }
+
+    .note.pinned {
+      border-color: rgba(245, 158, 11, 0.3);
+      background: rgba(30, 41, 59, 0.3);
+    }
+
+    .pin-indicator {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #f59e0b;
+    }
+
+    .note-color-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 8px;
     }
 
     @keyframes slideIn {
@@ -181,8 +402,8 @@
 
     .note:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
-      border-color: rgba(0, 87, 255, 0.3);
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+      border-color: rgba(99, 102, 241, 0.2);
     }
 
     .note::before {
@@ -192,7 +413,7 @@
       left: 0;
       width: 4px;
       height: 100%;
-      background: linear-gradient(to bottom, #0057FF, #7CECF4);
+      background: linear-gradient(to bottom, #6366f1, #8b5cf6);
     }
 
     .note p {
@@ -200,12 +421,18 @@
       padding: 0;
       line-height: 1.6;
       color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.01em;
     }
 
     .note-date {
-      font-size: 12px;
+      font-size: 11px;
       color: #94a3b8;
       margin-top: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 300;
+      letter-spacing: 0.02em;
     }
 
     .actions {
@@ -216,12 +443,12 @@
     }
 
     .btn-secondary {
-      background: rgba(15, 23, 42, 0.8);
+      background: rgba(15, 23, 42, 0.4);
       color: #cbd5e1;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 8px;
       padding: 8px 16px;
-      font-size: 14px;
+      font-size: 13px;
       cursor: pointer;
       transition: all 0.2s ease;
       display: flex;
@@ -229,21 +456,24 @@
       gap: 6px;
       flex: 1;
       justify-content: center;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.02em;
     }
 
     .btn-secondary:hover {
-      background: rgba(30, 41, 59, 0.9);
-      color: #7CECF4;
-      border-color: rgba(124, 236, 244, 0.3);
+      background: rgba(99, 102, 241, 0.1);
+      color: #a5b4fc;
+      border-color: rgba(99, 102, 241, 0.3);
     }
 
     .btn-danger {
-      background: rgba(127, 29, 29, 0.3);
+      background: rgba(127, 29, 29, 0.2);
       color: #fca5a5;
-      border: 1px solid rgba(248, 113, 113, 0.2);
+      border: 1px solid rgba(248, 113, 113, 0.1);
       border-radius: 8px;
       padding: 8px 16px;
-      font-size: 14px;
+      font-size: 13px;
       cursor: pointer;
       transition: all 0.2s ease;
       display: flex;
@@ -251,26 +481,117 @@
       gap: 6px;
       flex: 1;
       justify-content: center;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.02em;
     }
 
     .btn-danger:hover {
-      background: rgba(127, 29, 29, 0.5);
+      background: rgba(127, 29, 29, 0.3);
       color: #f87171;
+      border-color: rgba(248, 113, 113, 0.2);
     }
 
     .empty-state {
       text-align: center;
       padding: 40px 20px;
       color: #64748b;
-      background: rgba(30, 41, 59, 0.5);
+      background: rgba(30, 41, 59, 0.2);
       border-radius: 16px;
-      border: 1px dashed rgba(255, 255, 255, 0.1);
+      border: 1px dashed rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+    }
+
+    .empty-state h3 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      color: #e2e8f0;
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .empty-state p {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 14px;
     }
 
     .empty-state svg {
       width: 80px;
       opacity: 0.5;
       margin-bottom: 20px;
+    }
+
+    .daily-quote {
+      background: rgba(30, 41, 59, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+      border-left: 4px solid #6366f1;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .daily-quote::before {
+      content: '"';
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 60px;
+      color: rgba(99, 102, 241, 0.1);
+      font-family: 'Poppins', serif;
+      font-weight: 700;
+    }
+
+    .quote-text {
+      font-style: italic;
+      color: #e2e8f0;
+      margin-bottom: 10px;
+      font-size: 14px;
+      line-height: 1.6;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.01em;
+    }
+
+    .quote-author {
+      text-align: right;
+      color: #94a3b8;
+      font-size: 12px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+
+    .achievement-badge {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      display: none;
+      align-items: center;
+      gap: 10px;
+      z-index: 1000;
+      animation: slideInRight 0.5s ease-out;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
     }
 
     /* Modal Styles */
@@ -280,7 +601,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.8);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -302,12 +623,12 @@
       padding: 30px;
       width: 90%;
       max-width: 500px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
       border: 1px solid rgba(255, 255, 255, 0.1);
       transform: scale(0.8) translateY(-20px);
       opacity: 0;
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(20px);
     }
 
     .modal-overlay.active .modal {
@@ -331,6 +652,8 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: -0.01em;
     }
 
     .modal-close {
@@ -361,6 +684,9 @@
       color: #cbd5e1;
       line-height: 1.6;
       margin-bottom: 20px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.01em;
     }
 
     .modal-textarea {
@@ -371,15 +697,18 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
       outline: none;
       font-size: 16px;
-      background: rgba(15, 23, 42, 0.8);
+      background: rgba(15, 23, 42, 0.4);
       color: #f8fafc;
       resize: none;
       transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.5;
+      letter-spacing: 0.01em;
     }
 
     .modal-textarea:focus {
-      border-color: #0057FF;
-      box-shadow: 0 0 0 3px rgba(0, 87, 255, 0.2);
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
     }
 
     .modal-actions {
@@ -396,6 +725,8 @@
       font-weight: 500;
       cursor: pointer;
       transition: all 0.2s ease;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.02em;
     }
 
     .modal-btn-cancel {
@@ -408,13 +739,13 @@
     }
 
     .modal-btn-confirm {
-      background: linear-gradient(135deg, #0057FF 0%, #3b82f6 100%);
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
       color: white;
     }
 
     .modal-btn-confirm:hover {
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0, 87, 255, 0.3);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
     }
 
     .modal-btn-danger {
@@ -425,6 +756,54 @@
     .modal-btn-danger:hover {
       transform: translateY(-1px);
       box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+    }
+
+    .color-picker {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+      justify-content: center;
+    }
+
+    .color-option {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .color-option:hover {
+      transform: scale(1.2);
+    }
+
+    .color-option.selected {
+      border-color: white;
+      transform: scale(1.1);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    .color-option::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+    }
+
+    .color-option.selected::after {
+      border-color: rgba(255, 255, 255, 0.5);
+      animation: pulseColor 2s infinite;
+    }
+
+    @keyframes pulseColor {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.7; }
     }
 
     /* Delete Animation */
@@ -450,7 +829,7 @@
       color: #64748b;
       font-size: 14px;
       padding: 20px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .footer-content {
@@ -462,19 +841,32 @@
 
     .copyright {
       margin-bottom: 10px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+    }
+
+    .copyright b {
+      font-weight: 600;
+      background: linear-gradient(135deg, #a5b4fc 0%, #8b5cf6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-family: 'Poppins', sans-serif;
     }
 
     .support-section {
-      background: rgba(30, 41, 59, 0.7);
+      background: rgba(30, 41, 59, 0.2);
       border-radius: 12px;
       padding: 20px;
       width: 100%;
       max-width: 400px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
     }
 
     .support-title {
-      color: #7CECF4;
+      color: #a5b4fc;
       font-size: 16px;
       font-weight: 600;
       margin-bottom: 15px;
@@ -482,6 +874,8 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 0.01em;
     }
 
     .contact-links {
@@ -496,28 +890,31 @@
       justify-content: center;
       gap: 10px;
       padding: 10px 15px;
-      background: rgba(15, 23, 42, 0.8);
+      background: rgba(15, 23, 42, 0.4);
       border-radius: 8px;
       color: #cbd5e1;
       text-decoration: none;
       transition: all 0.3s ease;
       border: 1px solid rgba(255, 255, 255, 0.05);
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.02em;
     }
 
     .contact-link:hover {
-      background: rgba(30, 41, 59, 0.9);
+      background: rgba(99, 102, 241, 0.1);
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      color: #a5b4fc;
+      border-color: rgba(99, 102, 241, 0.3);
     }
 
     .whatsapp-link:hover {
       color: #25D366;
-      border-color: rgba(37, 211, 102, 0.3);
     }
 
     .instagram-link:hover {
       color: #E4405F;
-      border-color: rgba(228, 64, 95, 0.3);
     }
 
     .contact-icon {
@@ -596,6 +993,10 @@
       .modal-actions {
         flex-direction: column;
       }
+
+      .stats-container {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 360px) {
@@ -633,8 +1034,88 @@
       <p class="subtitle">Aplikasi catatan premium untuk produktivitas Anda</p>
     </header>
 
+    <!-- Banner Motivasi -->
+    <div class="motivation-banner" id="motivationBanner">
+      <div class="motivation-text">🎯 <span id="motivationText">Tulis satu ide hari ini, ciptakan masa depan esok!</span></div>
+      <button onclick="changeMotivation()" style="background: none; border: none; color: #a5b4fc; cursor: pointer; padding: 5px; border-radius: 50%; transition: background 0.2s ease;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 8V16M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Statistik -->
+    <div class="stats-container">
+      <div class="stat-card">
+        <div class="stat-value" id="totalNotes">0</div>
+        <div class="stat-label">Total Catatan</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="todayNotes">0</div>
+        <div class="stat-label">Hari Ini</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="pinnedNotes">0</div>
+        <div class="stat-label">Disematkan</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="streakDays">0</div>
+        <div class="stat-label">Hari Berturut-turut</div>
+      </div>
+    </div>
+
+    <!-- Kutipan Harian -->
+    <div class="daily-quote">
+      <div class="quote-text" id="dailyQuote">"Kata-kata yang ditulis hari ini adalah sejarah yang akan dibaca esok."</div>
+      <div class="quote-author" id="quoteAuthor">- Epistello</div>
+    </div>
+
     <section class="input-section">
       <textarea id="noteInput" placeholder="Tulis catatan Anda di sini..."></textarea>
+      
+      <!-- Fitur Tambahan -->
+      <div class="features-bar">
+        <button class="feature-btn" onclick="addEmoji()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/>
+            <path d="M8 14C8 14 9.5 16 12 16C14.5 16 16 14 16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M15 9H15.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9 9H9.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          Emoji
+        </button>
+        <button class="feature-btn" onclick="addTimestamp()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Waktu
+        </button>
+        <button class="feature-btn" onclick="toggleColorPicker()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.5 10.5C17.5 7.46243 15.0376 5 12 5C8.96243 5 6.5 7.46243 6.5 10.5C6.5 14 12 19 12 19C12 19 17.5 14 17.5 10.5Z" stroke="currentColor" stroke-width="2"/>
+            <path d="M14.5 10.5C14.5 11.3284 13.8284 12 13 12C12.1716 12 11.5 11.3284 11.5 10.5C11.5 9.67157 12.1716 9 13 9C13.8284 9 14.5 9.67157 14.5 10.5Z" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          Warna
+        </button>
+        <button class="feature-btn" onclick="addTodoList()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Checklist
+        </button>
+      </div>
+
+      <!-- Color Picker -->
+      <div class="color-picker" id="colorPicker" style="display: none;">
+        <div class="color-option selected" style="background: #6366f1;" onclick="selectColor('#6366f1')"></div>
+        <div class="color-option" style="background: #10b981;" onclick="selectColor('#10b981')"></div>
+        <div class="color-option" style="background: #f59e0b;" onclick="selectColor('#f59e0b')"></div>
+        <div class="color-option" style="background: #8b5cf6;" onclick="selectColor('#8b5cf6')"></div>
+        <div class="color-option" style="background: #ec4899;" onclick="selectColor('#ec4899')"></div>
+      </div>
+
       <button class="btn-primary" onclick="addNote()">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 4V20M4 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -646,12 +1127,26 @@
     <section class="notes-section">
       <div class="notes-header">
         <h2>Catatan Saya</h2>
+        <div class="filter-options">
+          <button class="filter-btn active" onclick="filterNotes('all')">Semua</button>
+          <button class="filter-btn" onclick="filterNotes('pinned')">Disematkan</button>
+          <button class="filter-btn" onclick="filterNotes('today')">Hari Ini</button>
+        </div>
         <div class="notes-count" id="notesCount">0 catatan</div>
       </div>
       <div class="notes-list" id="notesList">
         <!-- Catatan akan ditampilkan di sini -->
       </div>
     </section>
+
+    <!-- Badge Prestasi -->
+    <div class="achievement-badge" id="achievementBadge">
+      <div>🏆</div>
+      <div>
+        <strong id="achievementTitle">Prestasi Baru!</strong>
+        <div id="achievementDesc" style="font-size: 12px;"></div>
+      </div>
+    </div>
 
     <footer>
       <div class="footer-content">
@@ -735,12 +1230,59 @@
   <script>
     let currentEditingNote = null;
     let currentDeletingNote = null;
+    let selectedColor = '#6366f1';
+    let currentFilter = 'all';
+    let userStats = {
+      totalNotes: 0,
+      todayNotes: 0,
+      pinnedNotes: 0,
+      streakDays: 0,
+      lastNoteDate: null
+    };
+
+    // Array motivasi
+    const motivations = [
+      "Tulis satu ide hari ini, ciptakan masa depan esok!",
+      "Setiap catatan adalah langkah menuju kesuksesan!",
+      "Ide terbaik lahir dari catatan yang sederhana!",
+      "Jangan biarkan ide brilian menguap begitu saja!",
+      "Menulis adalah cara terbaik untuk mengorganisir pikiran!"
+    ];
+
+    // Array kutipan harian
+    const quotes = [
+      { text: "Kata-kata yang ditulis hari ini adalah sejarah yang akan dibaca esok.", author: "Epistello" },
+      { text: "Sebuah catatan kecil bisa menjadi awal dari pencapaian besar.", author: "Pepatah" },
+      { text: "Orang yang mencatat adalah orang yang tidak pernah lupa.", author: "Anonim" },
+      { text: "Tulis sekarang, kapan pun bisa dibaca nanti.", author: "Penulis Bijak" },
+      { text: "Dari coretan sederhana lahir karya-karya luar biasa.", author: "Inspirator" }
+    ];
+
+    // Prestasi yang bisa didapatkan
+    const achievements = [
+      { id: 'first_note', title: 'Pertama Kali!', description: 'Membuat catatan pertama' },
+      { id: 'five_notes', title: 'Penulis Pemula', description: 'Membuat 5 catatan' },
+      { id: 'ten_notes', title: 'Pencatat Andal', description: 'Membuat 10 catatan' },
+      { id: 'three_day_streak', title: 'Konsisten!', description: '3 hari berturut-turut mencatat' },
+      { id: 'seven_day_streak', title: 'Disiplin Tinggi', description: '7 hari berturut-turut mencatat' },
+      { id: 'first_pin', title: 'Prioritas Utama', description: 'Menyematkan catatan pertama' }
+    ];
 
     // Ambil catatan dari localStorage saat halaman dibuka
     window.onload = function() {
       let savedNotes = JSON.parse(localStorage.getItem("notes")) || [];
-      savedNotes.forEach(note => createNoteElement(note.text, note.date));
+      savedNotes.forEach(note => createNoteElement(note));
+      updateStats();
       updateNotesCount();
+      
+      // Tampilkan kutipan harian
+      showDailyQuote();
+      
+      // Tampilkan motivasi acak
+      changeMotivation();
+      
+      // Periksa prestasi
+      checkAchievements();
     };
 
     function addNote() {
@@ -758,27 +1300,60 @@
         minute: '2-digit'
       });
 
-      createNoteElement(input, date);
+      const noteData = {
+        text: input,
+        date: date,
+        color: selectedColor,
+        pinned: false,
+        timestamp: new Date().toISOString()
+      };
+
+      createNoteElement(noteData);
       saveNotes();
+      updateStats();
+      checkAchievements();
 
       document.getElementById("noteInput").value = "";
       updateNotesCount();
+      
+      // Reset color to default
+      selectColor('#6366f1');
     }
 
-    function createNoteElement(text, date) {
+    function createNoteElement(noteData) {
       let noteDiv = document.createElement("div");
       noteDiv.classList.add("note");
+      if (noteData.pinned) {
+        noteDiv.classList.add("pinned");
+      }
+      
+      // Set border color berdasarkan warna yang dipilih
+      noteDiv.style.borderLeftColor = noteData.color;
 
       let noteText = document.createElement("p");
-      noteText.innerText = text;
+      noteText.innerText = noteData.text;
 
       let noteDate = document.createElement("div");
       noteDate.classList.add("note-date");
-      noteDate.innerText = date;
+      noteDate.innerText = noteData.date;
 
       let actionsDiv = document.createElement("div");
       actionsDiv.classList.add("actions");
 
+      // Tombol Pin
+      let pinBtn = document.createElement("button");
+      pinBtn.classList.add("btn-secondary");
+      pinBtn.innerHTML = `
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 17V22M9 9V4L15 4V9L20 9V13H4V9L9 9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        ${noteData.pinned ? 'Lepas' : 'Sematkan'}
+      `;
+      pinBtn.onclick = function () {
+        togglePin(noteDiv, noteData);
+      };
+
+      // Tombol Edit
       let editBtn = document.createElement("button");
       editBtn.classList.add("btn-secondary");
       editBtn.innerHTML = `
@@ -789,9 +1364,10 @@
         Edit
       `;
       editBtn.onclick = function () {
-        openEditModal(noteDiv, noteText);
+        openEditModal(noteDiv, noteText, noteData);
       };
 
+      // Tombol Hapus
       let deleteBtn = document.createElement("button");
       deleteBtn.classList.add("btn-danger");
       deleteBtn.innerHTML = `
@@ -805,6 +1381,7 @@
         openDeleteModal(noteDiv);
       };
 
+      actionsDiv.appendChild(pinBtn);
       actionsDiv.appendChild(editBtn);
       actionsDiv.appendChild(deleteBtn);
 
@@ -812,16 +1389,214 @@
       noteDiv.appendChild(noteDate);
       noteDiv.appendChild(actionsDiv);
 
-      document.getElementById("notesList").appendChild(noteDiv);
+      // Tambahkan ke awal jika disematkan, jika tidak tambahkan ke akhir
+      if (noteData.pinned) {
+        document.getElementById("notesList").insertBefore(noteDiv, document.getElementById("notesList").firstChild);
+      } else {
+        document.getElementById("notesList").appendChild(noteDiv);
+      }
+    }
+
+    function togglePin(noteElement, noteData) {
+      noteData.pinned = !noteData.pinned;
+      if (noteData.pinned) {
+        noteElement.classList.add('pinned');
+        noteElement.querySelector('.btn-secondary').innerHTML = `
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 17V22M9 9V4L15 4V9L20 9V13H4V9L9 9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Lepas
+        `;
+      } else {
+        noteElement.classList.remove('pinned');
+        noteElement.querySelector('.btn-secondary').innerHTML = `
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 17V22M9 9V4L15 4V9L20 9V13H4V9L9 9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Sematkan
+        `;
+      }
+      
+      saveNotes();
+      updateStats();
+      filterNotes(currentFilter);
+      
+      if (noteData.pinned) {
+        showAchievement('first_pin');
+      }
+    }
+
+    // Fitur Tambahan
+    function addEmoji() {
+      const emojis = ['😊', '🎯', '💡', '📝', '🌟', '🔥', '💪', '🚀', '🎨', '✅'];
+      const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+      document.getElementById('noteInput').value += randomEmoji + ' ';
+    }
+
+    function addTimestamp() {
+      const now = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+      document.getElementById('noteInput').value += `[${now}] `;
+    }
+
+    function toggleColorPicker() {
+      const picker = document.getElementById('colorPicker');
+      picker.style.display = picker.style.display === 'none' ? 'flex' : 'none';
+    }
+
+    function selectColor(color) {
+      selectedColor = color;
+      document.querySelectorAll('.color-option').forEach(opt => {
+        opt.classList.remove('selected');
+      });
+      event.target.classList.add('selected');
+      document.getElementById('colorPicker').style.display = 'none';
+    }
+
+    function addTodoList() {
+      const input = document.getElementById('noteInput');
+      if (input.value.trim() === '') {
+        input.value = '✅ \n✅ \n✅ ';
+      } else {
+        input.value += '\n✅ ';
+      }
+    }
+
+    function changeMotivation() {
+      const randomIndex = Math.floor(Math.random() * motivations.length);
+      document.getElementById('motivationText').textContent = motivations[randomIndex];
+    }
+
+    function showDailyQuote() {
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      document.getElementById('dailyQuote').textContent = `"${quotes[randomIndex].text}"`;
+      document.getElementById('quoteAuthor').textContent = `- ${quotes[randomIndex].author}`;
+    }
+
+    function filterNotes(filter) {
+      currentFilter = filter;
+      
+      // Update active filter button
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      const notes = document.querySelectorAll('.note');
+      const today = new Date().toDateString();
+      
+      notes.forEach(note => {
+        let show = true;
+        
+        if (filter === 'pinned') {
+          show = note.classList.contains('pinned');
+        } else if (filter === 'today') {
+          const noteDate = new Date(note.querySelector('.note-date').textContent).toDateString();
+          show = noteDate === today;
+        }
+        
+        note.style.display = show ? 'block' : 'none';
+      });
+      
+      updateNotesCount();
+    }
+
+    function updateStats() {
+      const notes = JSON.parse(localStorage.getItem("notes")) || [];
+      const today = new Date().toDateString();
+      
+      userStats.totalNotes = notes.length;
+      userStats.todayNotes = notes.filter(note => {
+        const noteDate = new Date(note.timestamp).toDateString();
+        return noteDate === today;
+      }).length;
+      userStats.pinnedNotes = notes.filter(note => note.pinned).length;
+      
+      // Calculate streak
+      if (notes.length > 0) {
+        const sortedDates = notes.map(n => new Date(n.timestamp).toDateString()).sort();
+        let streak = 1;
+        let currentDate = new Date(sortedDates[sortedDates.length - 1]);
+        
+        for (let i = sortedDates.length - 2; i >= 0; i--) {
+          const prevDate = new Date(sortedDates[i]);
+          const diffDays = Math.floor((currentDate - prevDate) / (1000 * 60 * 60 * 24));
+          
+          if (diffDays === 1) {
+            streak++;
+            currentDate = prevDate;
+          } else if (diffDays > 1) {
+            break;
+          }
+        }
+        
+        userStats.streakDays = streak;
+      }
+      
+      // Update UI
+      document.getElementById('totalNotes').textContent = userStats.totalNotes;
+      document.getElementById('todayNotes').textContent = userStats.todayNotes;
+      document.getElementById('pinnedNotes').textContent = userStats.pinnedNotes;
+      document.getElementById('streakDays').textContent = userStats.streakDays;
+    }
+
+    function checkAchievements() {
+      const notes = JSON.parse(localStorage.getItem("notes")) || [];
+      const achieved = JSON.parse(localStorage.getItem("achievements")) || [];
+      
+      // Check first note achievement
+      if (notes.length === 1 && !achieved.includes('first_note')) {
+        showAchievement('first_note');
+        achieved.push('first_note');
+      }
+      
+      // Check 5 notes achievement
+      if (notes.length === 5 && !achieved.includes('five_notes')) {
+        showAchievement('five_notes');
+        achieved.push('five_notes');
+      }
+      
+      // Check 10 notes achievement
+      if (notes.length === 10 && !achieved.includes('ten_notes')) {
+        showAchievement('ten_notes');
+        achieved.push('ten_notes');
+      }
+      
+      // Check streak achievements
+      if (userStats.streakDays === 3 && !achieved.includes('three_day_streak')) {
+        showAchievement('three_day_streak');
+        achieved.push('three_day_streak');
+      }
+      
+      if (userStats.streakDays === 7 && !achieved.includes('seven_day_streak')) {
+        showAchievement('seven_day_streak');
+        achieved.push('seven_day_streak');
+      }
+      
+      localStorage.setItem("achievements", JSON.stringify(achieved));
+    }
+
+    function showAchievement(achievementId) {
+      const achievement = achievements.find(a => a.id === achievementId);
+      if (!achievement) return;
+      
+      const badge = document.getElementById('achievementBadge');
+      document.getElementById('achievementTitle').textContent = achievement.title;
+      document.getElementById('achievementDesc').textContent = achievement.description;
+      
+      badge.style.display = 'flex';
+      
+      // Auto hide after 5 seconds
+      setTimeout(() => {
+        badge.style.display = 'none';
+      }, 5000);
     }
 
     // Modal Functions
-    function openEditModal(noteElement, textElement) {
-      currentEditingNote = { element: noteElement, textElement: textElement };
+    function openEditModal(noteElement, textElement, noteData) {
+      currentEditingNote = { element: noteElement, textElement: textElement, data: noteData };
       document.getElementById('editTextarea').value = textElement.innerText;
       document.getElementById('editModal').classList.add('active');
       
-      // Focus pada textarea setelah modal terbuka
       setTimeout(() => {
         document.getElementById('editTextarea').focus();
       }, 300);
@@ -840,7 +1615,6 @@
           saveNotes();
           closeEditModal();
           
-          // Add success animation
           currentEditingNote.element.style.animation = 'none';
           setTimeout(() => {
             currentEditingNote.element.style.animation = 'pulse 0.6s ease';
@@ -863,12 +1637,12 @@
 
     function confirmDelete() {
       if (currentDeletingNote) {
-        // Add delete animation
         currentDeletingNote.classList.add('deleting');
         
         setTimeout(() => {
           currentDeletingNote.remove();
           saveNotes();
+          updateStats();
           updateNotesCount();
           closeDeleteModal();
         }, 400);
@@ -897,23 +1671,44 @@
       document.querySelectorAll(".note").forEach(note => {
         const text = note.querySelector("p").innerText;
         const date = note.querySelector(".note-date").innerText;
-        notes.push({text, date});
+        const pinned = note.classList.contains('pinned');
+        const color = note.style.borderLeftColor || '#6366f1';
+        
+        // Find original data to preserve timestamp
+        const originalNotes = JSON.parse(localStorage.getItem("notes")) || [];
+        const originalNote = originalNotes.find(n => n.date === date && n.text === text);
+        
+        notes.push({
+          text,
+          date,
+          pinned,
+          color,
+          timestamp: originalNote ? originalNote.timestamp : new Date().toISOString()
+        });
       });
+      
+      // Sort by pinned first, then by timestamp
+      notes.sort((a, b) => {
+        if (a.pinned && !b.pinned) return -1;
+        if (!a.pinned && b.pinned) return 1;
+        return new Date(b.timestamp) - new Date(a.timestamp);
+      });
+      
       localStorage.setItem("notes", JSON.stringify(notes));
     }
 
     function updateNotesCount() {
-      const count = document.querySelectorAll(".note").length;
+      const visibleNotes = document.querySelectorAll('.note[style*="display: block"], .note:not([style*="display"])');
+      const count = visibleNotes.length;
       const notesCount = document.getElementById("notesCount");
       notesCount.textContent = `${count} catatan`;
       
-      // Tampilkan pesan jika tidak ada catatan
       const notesList = document.getElementById("notesList");
-      if (count === 0) {
+      if (count === 0 && !notesList.querySelector('.empty-state')) {
         notesList.innerHTML = `
           <div class="empty-state">
             <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8 14V16M12 14V16M16 14V16M3 10H21V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V10Z" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M8 14V16M12 14V16M16 14V16M3 10H21V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 21.4142C3.21071 21.0391 3 19.5304 3 19V10Z" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M3 10V6C3 5.46957 3.21071 4.96086 3.58579 4.58579C3.96086 4.21071 4.46957 4 5 4H19C19.5304 4 20.0391 4.21071 20.4142 4.58579C20.7893 4.96086 21 5.46957 21 6V10" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M7 2V4" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M17 2V4" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -922,6 +1717,11 @@
             <p>Mulai dengan menambahkan catatan pertama Anda</p>
           </div>
         `;
+      } else if (count > 0 && notesList.querySelector('.empty-state')) {
+        notesList.innerHTML = '';
+        const savedNotes = JSON.parse(localStorage.getItem("notes")) || [];
+        savedNotes.forEach(note => createNoteElement(note));
+        filterNotes(currentFilter);
       }
     }
 
