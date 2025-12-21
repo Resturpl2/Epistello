@@ -6,7 +6,7 @@
   <title>Epistello | Aplikasi Catatan Premium</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -63,16 +63,16 @@
     }
 
     h1 {
-      font-size: 32px;
-      font-weight: 700;
+      font-size: 36px;
+      font-weight: 800;
       color: #ffffff;
       letter-spacing: -0.03em;
       background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      font-family: 'Poppins', sans-serif;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      font-family: 'Outfit', sans-serif;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
 
     .subtitle {
@@ -81,12 +81,13 @@
       font-weight: 300;
       letter-spacing: 0.02em;
       font-family: 'Inter', sans-serif;
+      margin-top: 8px;
     }
 
     .motivation-banner {
       background: linear-gradient(90deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
       border-radius: 12px;
-      padding: 15px;
+      padding: 18px;
       margin: 20px 0;
       display: flex;
       align-items: center;
@@ -117,7 +118,7 @@
 
     .motivation-text {
       flex: 1;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 500;
       color: #e2e8f0;
       font-family: 'Inter', sans-serif;
@@ -134,7 +135,7 @@
     .stat-card {
       background: rgba(30, 41, 59, 0.3);
       border-radius: 12px;
-      padding: 15px;
+      padding: 18px;
       text-align: center;
       border: 1px solid rgba(255, 255, 255, 0.05);
       transition: all 0.3s ease;
@@ -156,18 +157,18 @@
     .stat-card:hover {
       transform: translateY(-5px);
       border-color: rgba(99, 102, 241, 0.3);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
     }
 
     .stat-value {
-      font-size: 24px;
+      font-size: 28px;
       font-weight: 700;
       background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       margin-bottom: 5px;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Outfit', sans-serif;
       letter-spacing: -0.02em;
     }
 
@@ -194,7 +195,7 @@
       width: 100%;
       height: 120px;
       border-radius: 12px;
-      padding: 16px;
+      padding: 18px;
       border: 1px solid rgba(255, 255, 255, 0.1);
       outline: none;
       margin-bottom: 16px;
@@ -204,8 +205,9 @@
       resize: none;
       transition: all 0.3s ease;
       font-family: 'Inter', sans-serif;
-      line-height: 1.5;
+      line-height: 1.6;
       letter-spacing: 0.01em;
+      font-weight: 400;
     }
 
     textarea:focus {
@@ -230,14 +232,14 @@
       background: rgba(15, 23, 42, 0.4);
       border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 8px;
-      padding: 8px 12px;
-      font-size: 12px;
+      padding: 10px 14px;
+      font-size: 13px;
       color: #cbd5e1;
       cursor: pointer;
       transition: all 0.2s ease;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       font-family: 'Inter', sans-serif;
       font-weight: 500;
       letter-spacing: 0.02em;
@@ -249,12 +251,72 @@
       color: #a5b4fc;
     }
 
+    .color-picker {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .color-label {
+      font-size: 13px;
+      color: #94a3b8;
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.03em;
+    }
+
+    .color-option {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.2s ease;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .color-option:hover {
+      transform: scale(1.15);
+    }
+
+    .color-option.selected {
+      border-color: white;
+      transform: scale(1.1);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+    }
+
+    .color-option .checkmark {
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .color-option.selected .checkmark {
+      opacity: 1;
+    }
+
+    .color-name {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 4px;
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+    }
+
     .btn-primary {
       background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
       color: white;
       border: none;
       border-radius: 12px;
-      padding: 12px 24px;
+      padding: 14px 28px;
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
@@ -263,11 +325,11 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.2);
       width: 100%;
       position: relative;
       overflow: hidden;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Outfit', sans-serif;
       letter-spacing: 0.02em;
     }
 
@@ -288,7 +350,7 @@
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
     }
 
     .btn-primary:active {
@@ -305,10 +367,10 @@
     }
 
     h2 {
-      font-size: 24px;
-      font-weight: 600;
+      font-size: 26px;
+      font-weight: 700;
       color: #f8fafc;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Outfit', sans-serif;
       letter-spacing: -0.02em;
     }
 
@@ -322,8 +384,8 @@
       background: rgba(15, 23, 42, 0.4);
       border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 20px;
-      padding: 6px 12px;
-      font-size: 12px;
+      padding: 8px 16px;
+      font-size: 13px;
       color: #94a3b8;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -342,7 +404,7 @@
     .notes-count {
       background: rgba(15, 23, 42, 0.4);
       color: #94a3b8;
-      padding: 6px 12px;
+      padding: 8px 16px;
       border-radius: 20px;
       font-size: 13px;
       font-weight: 500;
@@ -359,7 +421,7 @@
     .note {
       background: rgba(30, 41, 59, 0.2);
       border-radius: 16px;
-      padding: 20px;
+      padding: 22px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
       border: 1px solid rgba(255, 255, 255, 0.05);
       transition: all 0.3s ease;
@@ -376,17 +438,9 @@
 
     .pin-indicator {
       position: absolute;
-      top: 10px;
-      right: 10px;
+      top: 15px;
+      right: 15px;
       color: #f59e0b;
-    }
-
-    .note-color-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      display: inline-block;
-      margin-right: 8px;
     }
 
     @keyframes slideIn {
@@ -401,8 +455,8 @@
     }
 
     .note:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
       border-color: rgba(99, 102, 241, 0.2);
     }
 
@@ -411,19 +465,25 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 4px;
+      width: 5px;
       height: 100%;
       background: linear-gradient(to bottom, #6366f1, #8b5cf6);
     }
 
-    .note p {
+    .note-content {
+      margin-bottom: 12px;
+    }
+
+    .note-text {
       margin: 0;
       padding: 0;
-      line-height: 1.6;
+      line-height: 1.7;
       color: #e2e8f0;
       font-family: 'Inter', sans-serif;
       font-weight: 400;
       letter-spacing: 0.01em;
+      font-size: 15px;
+      transition: color 0.3s ease;
     }
 
     .note-date {
@@ -431,7 +491,7 @@
       color: #94a3b8;
       margin-top: 8px;
       font-family: 'JetBrains Mono', monospace;
-      font-weight: 300;
+      font-weight: 400;
       letter-spacing: 0.02em;
     }
 
@@ -447,7 +507,7 @@
       color: #cbd5e1;
       border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 8px;
-      padding: 8px 16px;
+      padding: 10px 18px;
       font-size: 13px;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -459,6 +519,7 @@
       font-family: 'Inter', sans-serif;
       font-weight: 500;
       letter-spacing: 0.02em;
+      min-height: 40px;
     }
 
     .btn-secondary:hover {
@@ -472,7 +533,7 @@
       color: #fca5a5;
       border: 1px solid rgba(248, 113, 113, 0.1);
       border-radius: 8px;
-      padding: 8px 16px;
+      padding: 10px 18px;
       font-size: 13px;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -484,6 +545,7 @@
       font-family: 'Inter', sans-serif;
       font-weight: 500;
       letter-spacing: 0.02em;
+      min-height: 40px;
     }
 
     .btn-danger:hover {
@@ -494,7 +556,7 @@
 
     .empty-state {
       text-align: center;
-      padding: 40px 20px;
+      padding: 60px 20px;
       color: #64748b;
       background: rgba(30, 41, 59, 0.2);
       border-radius: 16px;
@@ -503,29 +565,31 @@
     }
 
     .empty-state h3 {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Outfit', sans-serif;
       font-weight: 600;
       color: #e2e8f0;
-      margin-bottom: 8px;
-      font-size: 18px;
+      margin-bottom: 12px;
+      font-size: 20px;
     }
 
     .empty-state p {
       font-family: 'Inter', sans-serif;
       font-weight: 300;
-      font-size: 14px;
+      font-size: 15px;
+      max-width: 400px;
+      margin: 0 auto;
     }
 
     .empty-state svg {
       width: 80px;
       opacity: 0.5;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
     .daily-quote {
       background: rgba(30, 41, 59, 0.2);
       border-radius: 12px;
-      padding: 20px;
+      padding: 24px;
       margin: 20px 0;
       border-left: 4px solid #6366f1;
       backdrop-filter: blur(10px);
@@ -538,18 +602,18 @@
       position: absolute;
       top: 10px;
       right: 20px;
-      font-size: 60px;
+      font-size: 80px;
       color: rgba(99, 102, 241, 0.1);
-      font-family: 'Poppins', serif;
-      font-weight: 700;
+      font-family: 'Outfit', serif;
+      font-weight: 800;
     }
 
     .quote-text {
       font-style: italic;
       color: #e2e8f0;
-      margin-bottom: 10px;
-      font-size: 14px;
-      line-height: 1.6;
+      margin-bottom: 12px;
+      font-size: 15px;
+      line-height: 1.7;
       font-family: 'Inter', sans-serif;
       font-weight: 300;
       letter-spacing: 0.01em;
@@ -558,7 +622,7 @@
     .quote-author {
       text-align: right;
       color: #94a3b8;
-      font-size: 12px;
+      font-size: 13px;
       font-family: 'Inter', sans-serif;
       font-weight: 500;
       letter-spacing: 0.03em;
@@ -570,17 +634,18 @@
       right: 20px;
       background: linear-gradient(135deg, #f59e0b, #d97706);
       color: white;
-      padding: 15px;
+      padding: 18px;
       border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
       display: none;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       z-index: 1000;
       animation: slideInRight 0.5s ease-out;
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Outfit', sans-serif;
+      max-width: 300px;
     }
 
     @keyframes slideInRight {
@@ -620,7 +685,7 @@
     .modal {
       background: rgba(30, 41, 59, 0.95);
       border-radius: 16px;
-      padding: 30px;
+      padding: 32px;
       width: 90%;
       max-width: 500px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
@@ -640,19 +705,19 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 20px;
-      padding-bottom: 15px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .modal-title {
-      font-size: 20px;
-      font-weight: 600;
+      font-size: 22px;
+      font-weight: 700;
       color: #f8fafc;
       display: flex;
       align-items: center;
       gap: 10px;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Outfit', sans-serif;
       letter-spacing: -0.01em;
     }
 
@@ -663,8 +728,8 @@
       font-size: 24px;
       cursor: pointer;
       transition: color 0.2s ease;
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -677,7 +742,7 @@
     }
 
     .modal-body {
-      margin-bottom: 25px;
+      margin-bottom: 28px;
     }
 
     .modal-text {
@@ -691,9 +756,9 @@
 
     .modal-textarea {
       width: 100%;
-      height: 120px;
+      height: 140px;
       border-radius: 12px;
-      padding: 16px;
+      padding: 18px;
       border: 1px solid rgba(255, 255, 255, 0.1);
       outline: none;
       font-size: 16px;
@@ -702,7 +767,7 @@
       resize: none;
       transition: all 0.3s ease;
       font-family: 'Inter', sans-serif;
-      line-height: 1.5;
+      line-height: 1.6;
       letter-spacing: 0.01em;
     }
 
@@ -718,15 +783,16 @@
     }
 
     .modal-btn {
-      padding: 10px 20px;
+      padding: 12px 24px;
       border: none;
       border-radius: 8px;
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.2s ease;
       font-family: 'Inter', sans-serif;
       letter-spacing: 0.02em;
+      min-height: 44px;
     }
 
     .modal-btn-cancel {
@@ -744,8 +810,8 @@
     }
 
     .modal-btn-confirm:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
     }
 
     .modal-btn-danger {
@@ -754,56 +820,44 @@
     }
 
     .modal-btn-danger:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(220, 38, 38, 0.3);
     }
 
-    .color-picker {
+    .modal-color-picker {
       display: flex;
       gap: 10px;
-      margin-bottom: 15px;
-      justify-content: center;
+      margin: 20px 0;
+      flex-wrap: wrap;
     }
 
-    .color-option {
+    .modal-color-option {
       width: 28px;
       height: 28px;
-      border-radius: 50%;
+      border-radius: 6px;
       cursor: pointer;
       border: 2px solid transparent;
       transition: all 0.2s ease;
-      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .color-option:hover {
-      transform: scale(1.2);
-    }
-
-    .color-option.selected {
+    .modal-color-option.selected {
       border-color: white;
       transform: scale(1.1);
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
     }
 
-    .color-option::after {
-      content: '';
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-      border-radius: 50%;
-      border: 2px solid transparent;
+    .modal-color-option .modal-checkmark {
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      opacity: 0;
     }
 
-    .color-option.selected::after {
-      border-color: rgba(255, 255, 255, 0.5);
-      animation: pulseColor 2s infinite;
-    }
-
-    @keyframes pulseColor {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.1); opacity: 0.7; }
+    .modal-color-option.selected .modal-checkmark {
+      opacity: 1;
     }
 
     /* Delete Animation */
@@ -835,30 +889,30 @@
     .footer-content {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 24px;
       align-items: center;
     }
 
     .copyright {
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       font-family: 'Inter', sans-serif;
       font-weight: 300;
       letter-spacing: 0.02em;
     }
 
     .copyright b {
-      font-weight: 600;
+      font-weight: 700;
       background: linear-gradient(135deg, #a5b4fc 0%, #8b5cf6 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Outfit', sans-serif;
     }
 
     .support-section {
       background: rgba(30, 41, 59, 0.2);
       border-radius: 12px;
-      padding: 20px;
+      padding: 24px;
       width: 100%;
       max-width: 400px;
       border: 1px solid rgba(255, 255, 255, 0.05);
@@ -869,12 +923,12 @@
       color: #a5b4fc;
       font-size: 16px;
       font-weight: 600;
-      margin-bottom: 15px;
+      margin-bottom: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      font-family: 'Poppins', sans-serif;
+      gap: 10px;
+      font-family: 'Outfit', sans-serif;
       letter-spacing: 0.01em;
     }
 
@@ -888,8 +942,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      padding: 10px 15px;
+      gap: 12px;
+      padding: 12px 18px;
       background: rgba(15, 23, 42, 0.4);
       border-radius: 8px;
       color: #cbd5e1;
@@ -904,7 +958,7 @@
     .contact-link:hover {
       background: rgba(99, 102, 241, 0.1);
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
       color: #a5b4fc;
       border-color: rgba(99, 102, 241, 0.3);
     }
@@ -934,6 +988,7 @@
       
       .btn-secondary, .btn-danger {
         flex: none;
+        min-width: 100px;
       }
 
       .contact-links {
@@ -961,7 +1016,7 @@
       }
       
       h1 {
-        font-size: 26px;
+        font-size: 30px;
       }
       
       .subtitle {
@@ -973,7 +1028,7 @@
       }
       
       .note {
-        padding: 16px;
+        padding: 18px;
       }
       
       .notes-header {
@@ -982,11 +1037,11 @@
       }
 
       .support-section {
-        padding: 15px;
+        padding: 20px;
       }
 
       .modal {
-        padding: 20px;
+        padding: 24px;
         margin: 20px;
       }
 
@@ -995,13 +1050,21 @@
       }
 
       .stats-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .color-picker {
+        justify-content: center;
+      }
+
+      .features-bar {
+        justify-content: center;
       }
     }
 
     @media (max-width: 360px) {
       h1 {
-        font-size: 22px;
+        font-size: 26px;
       }
       
       .logo {
@@ -1014,12 +1077,16 @@
       }
       
       textarea {
-        padding: 12px;
-        font-size: 14px;
+        padding: 14px;
+        font-size: 15px;
       }
 
       .contact-links {
         flex-direction: column;
+      }
+
+      .stats-container {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -1028,7 +1095,7 @@
   <div class="container">
     <header>
       <div class="logo">
-        <div class="logo-icon">🦅</div>
+        <div class="logo-icon">📝</div>
         <h1>Epistello</h1>
       </div>
       <p class="subtitle">Aplikasi catatan premium untuk produktivitas Anda</p>
@@ -1037,7 +1104,7 @@
     <!-- Banner Motivasi -->
     <div class="motivation-banner" id="motivationBanner">
       <div class="motivation-text">🎯 <span id="motivationText">Tulis satu ide hari ini, ciptakan masa depan esok!</span></div>
-      <button onclick="changeMotivation()" style="background: none; border: none; color: #a5b4fc; cursor: pointer; padding: 5px; border-radius: 50%; transition: background 0.2s ease;">
+      <button onclick="changeMotivation()" style="background: none; border: none; color: #a5b4fc; cursor: pointer; padding: 6px; border-radius: 50%; transition: background 0.2s ease;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2"/>
           <path d="M12 8V16M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -1074,30 +1141,61 @@
     <section class="input-section">
       <textarea id="noteInput" placeholder="Tulis catatan Anda di sini..."></textarea>
       
+      <!-- Fitur Warna -->
+      <div class="color-picker">
+        <div class="color-label">Pilih warna teks:</div>
+        <div>
+          <div class="color-option selected" style="background: #6366f1;" onclick="selectColor('#6366f1')" data-name="Indigo">
+            <div class="checkmark">✓</div>
+          </div>
+          <div class="color-name">Indigo</div>
+        </div>
+        <div>
+          <div class="color-option" style="background: #10b981;" onclick="selectColor('#10b981')" data-name="Emerald">
+            <div class="checkmark">✓</div>
+          </div>
+          <div class="color-name">Emerald</div>
+        </div>
+        <div>
+          <div class="color-option" style="background: #f59e0b;" onclick="selectColor('#f59e0b')" data-name="Amber">
+            <div class="checkmark">✓</div>
+          </div>
+          <div class="color-name">Amber</div>
+        </div>
+        <div>
+          <div class="color-option" style="background: #8b5cf6;" onclick="selectColor('#8b5cf6')" data-name="Violet">
+            <div class="checkmark">✓</div>
+          </div>
+          <div class="color-name">Violet</div>
+        </div>
+        <div>
+          <div class="color-option" style="background: #ec4899;" onclick="selectColor('#ec4899')" data-name="Pink">
+            <div class="checkmark">✓</div>
+          </div>
+          <div class="color-name">Pink</div>
+        </div>
+        <div>
+          <div class="color-option" style="background: #3b82f6;" onclick="selectColor('#3b82f6')" data-name="Blue">
+            <div class="checkmark">✓</div>
+          </div>
+          <div class="color-name">Blue</div>
+        </div>
+        <div>
+          <div class="color-option" style="background: #06b6d4;" onclick="selectColor('#06b6d4')" data-name="Cyan">
+            <div class="checkmark">✓</div>
+          </div>
+          <div class="color-name">Cyan</div>
+        </div>
+      </div>
+
       <!-- Fitur Tambahan -->
       <div class="features-bar">
-        <button class="feature-btn" onclick="addEmoji()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/>
-            <path d="M8 14C8 14 9.5 16 12 16C14.5 16 16 14 16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M15 9H15.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M9 9H9.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          Emoji
-        </button>
         <button class="feature-btn" onclick="addTimestamp()">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/>
             <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          Waktu
-        </button>
-        <button class="feature-btn" onclick="toggleColorPicker()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17.5 10.5C17.5 7.46243 15.0376 5 12 5C8.96243 5 6.5 7.46243 6.5 10.5C6.5 14 12 19 12 19C12 19 17.5 14 17.5 10.5Z" stroke="currentColor" stroke-width="2"/>
-            <path d="M14.5 10.5C14.5 11.3284 13.8284 12 13 12C12.1716 12 11.5 11.3284 11.5 10.5C11.5 9.67157 12.1716 9 13 9C13.8284 9 14.5 9.67157 14.5 10.5Z" stroke="currentColor" stroke-width="2"/>
-          </svg>
-          Warna
+          Tambah Waktu
         </button>
         <button class="feature-btn" onclick="addTodoList()">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1105,15 +1203,6 @@
           </svg>
           Checklist
         </button>
-      </div>
-
-      <!-- Color Picker -->
-      <div class="color-picker" id="colorPicker" style="display: none;">
-        <div class="color-option selected" style="background: #6366f1;" onclick="selectColor('#6366f1')"></div>
-        <div class="color-option" style="background: #10b981;" onclick="selectColor('#10b981')"></div>
-        <div class="color-option" style="background: #f59e0b;" onclick="selectColor('#f59e0b')"></div>
-        <div class="color-option" style="background: #8b5cf6;" onclick="selectColor('#8b5cf6')"></div>
-        <div class="color-option" style="background: #ec4899;" onclick="selectColor('#ec4899')"></div>
       </div>
 
       <button class="btn-primary" onclick="addNote()">
@@ -1196,6 +1285,23 @@
       </div>
       <div class="modal-body">
         <textarea class="modal-textarea" id="editTextarea" placeholder="Edit catatan Anda..."></textarea>
+        <div class="modal-color-picker">
+          <div class="modal-color-option selected" style="background: #6366f1;" onclick="selectEditColor('#6366f1')">
+            <div class="modal-checkmark">✓</div>
+          </div>
+          <div class="modal-color-option" style="background: #10b981;" onclick="selectEditColor('#10b981')">
+            <div class="modal-checkmark">✓</div>
+          </div>
+          <div class="modal-color-option" style="background: #f59e0b;" onclick="selectEditColor('#f59e0b')">
+            <div class="modal-checkmark">✓</div>
+          </div>
+          <div class="modal-color-option" style="background: #8b5cf6;" onclick="selectEditColor('#8b5cf6')">
+            <div class="modal-checkmark">✓</div>
+          </div>
+          <div class="modal-color-option" style="background: #ec4899;" onclick="selectEditColor('#ec4899')">
+            <div class="modal-checkmark">✓</div>
+          </div>
+        </div>
       </div>
       <div class="modal-actions">
         <button class="modal-btn modal-btn-cancel" onclick="closeEditModal()">Batal</button>
@@ -1231,6 +1337,7 @@
     let currentEditingNote = null;
     let currentDeletingNote = null;
     let selectedColor = '#6366f1';
+    let currentEditColor = '#6366f1';
     let currentFilter = 'all';
     let userStats = {
       totalNotes: 0,
@@ -1246,7 +1353,10 @@
       "Setiap catatan adalah langkah menuju kesuksesan!",
       "Ide terbaik lahir dari catatan yang sederhana!",
       "Jangan biarkan ide brilian menguap begitu saja!",
-      "Menulis adalah cara terbaik untuk mengorganisir pikiran!"
+      "Menulis adalah cara terbaik untuk mengorganisir pikiran!",
+      "Catatan kecil hari ini, karya besar esok hari!",
+      "Produktivitas dimulai dari satu catatan!",
+      "Tidak ada ide yang terlalu kecil untuk dicatat!"
     ];
 
     // Array kutipan harian
@@ -1255,7 +1365,9 @@
       { text: "Sebuah catatan kecil bisa menjadi awal dari pencapaian besar.", author: "Pepatah" },
       { text: "Orang yang mencatat adalah orang yang tidak pernah lupa.", author: "Anonim" },
       { text: "Tulis sekarang, kapan pun bisa dibaca nanti.", author: "Penulis Bijak" },
-      { text: "Dari coretan sederhana lahir karya-karya luar biasa.", author: "Inspirator" }
+      { text: "Dari coretan sederhana lahir karya-karya luar biasa.", author: "Inspirator" },
+      { text: "Pena lebih tajam dari ingatan, tuliskan sebelum terlupa.", author: "Filsuf Modern" },
+      { text: "Setiap halaman kosong adalah peluang baru.", author: "Penulis" }
     ];
 
     // Prestasi yang bisa didapatkan
@@ -1265,7 +1377,8 @@
       { id: 'ten_notes', title: 'Pencatat Andal', description: 'Membuat 10 catatan' },
       { id: 'three_day_streak', title: 'Konsisten!', description: '3 hari berturut-turut mencatat' },
       { id: 'seven_day_streak', title: 'Disiplin Tinggi', description: '7 hari berturut-turut mencatat' },
-      { id: 'first_pin', title: 'Prioritas Utama', description: 'Menyematkan catatan pertama' }
+      { id: 'first_pin', title: 'Prioritas Utama', description: 'Menyematkan catatan pertama' },
+      { id: 'color_master', title: 'Seniman Warna', description: 'Menggunakan semua warna yang tersedia' }
     ];
 
     // Ambil catatan dari localStorage saat halaman dibuka
@@ -1330,8 +1443,19 @@
       // Set border color berdasarkan warna yang dipilih
       noteDiv.style.borderLeftColor = noteData.color;
 
+      let contentDiv = document.createElement("div");
+      contentDiv.classList.add("note-content");
+
       let noteText = document.createElement("p");
+      noteText.classList.add("note-text");
       noteText.innerText = noteData.text;
+      // Set warna teks sesuai pilihan
+      noteText.style.color = noteData.color;
+      
+      // Tambahkan efek glow subtle untuk teks berwarna
+      if (noteData.color !== '#6366f1') {
+        noteText.style.textShadow = `0 0 1px ${noteData.color}20`;
+      }
 
       let noteDate = document.createElement("div");
       noteDate.classList.add("note-date");
@@ -1385,7 +1509,8 @@
       actionsDiv.appendChild(editBtn);
       actionsDiv.appendChild(deleteBtn);
 
-      noteDiv.appendChild(noteText);
+      contentDiv.appendChild(noteText);
+      noteDiv.appendChild(contentDiv);
       noteDiv.appendChild(noteDate);
       noteDiv.appendChild(actionsDiv);
 
@@ -1427,29 +1552,9 @@
     }
 
     // Fitur Tambahan
-    function addEmoji() {
-      const emojis = ['😊', '🎯', '💡', '📝', '🌟', '🔥', '💪', '🚀', '🎨', '✅'];
-      const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-      document.getElementById('noteInput').value += randomEmoji + ' ';
-    }
-
     function addTimestamp() {
       const now = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
       document.getElementById('noteInput').value += `[${now}] `;
-    }
-
-    function toggleColorPicker() {
-      const picker = document.getElementById('colorPicker');
-      picker.style.display = picker.style.display === 'none' ? 'flex' : 'none';
-    }
-
-    function selectColor(color) {
-      selectedColor = color;
-      document.querySelectorAll('.color-option').forEach(opt => {
-        opt.classList.remove('selected');
-      });
-      event.target.classList.add('selected');
-      document.getElementById('colorPicker').style.display = 'none';
     }
 
     function addTodoList() {
@@ -1459,6 +1564,32 @@
       } else {
         input.value += '\n✅ ';
       }
+    }
+
+    function selectColor(color) {
+      selectedColor = color;
+      document.querySelectorAll('.color-option').forEach(opt => {
+        opt.classList.remove('selected');
+      });
+      event.target.classList.add('selected');
+      
+      // Preview warna di textarea
+      const textarea = document.getElementById('noteInput');
+      textarea.style.color = color;
+      textarea.style.borderColor = color + '50';
+    }
+
+    function selectEditColor(color) {
+      currentEditColor = color;
+      document.querySelectorAll('.modal-color-option').forEach(opt => {
+        opt.classList.remove('selected');
+      });
+      event.target.classList.add('selected');
+      
+      // Preview warna di modal textarea
+      const editTextarea = document.getElementById('editTextarea');
+      editTextarea.style.color = color;
+      editTextarea.style.borderColor = color + '50';
     }
 
     function changeMotivation() {
@@ -1572,6 +1703,13 @@
         achieved.push('seven_day_streak');
       }
       
+      // Check color achievement
+      const uniqueColors = [...new Set(notes.map(note => note.color))];
+      if (uniqueColors.length >= 5 && !achieved.includes('color_master')) {
+        showAchievement('color_master');
+        achieved.push('color_master');
+      }
+      
       localStorage.setItem("achievements", JSON.stringify(achieved));
     }
 
@@ -1593,8 +1731,27 @@
 
     // Modal Functions
     function openEditModal(noteElement, textElement, noteData) {
-      currentEditingNote = { element: noteElement, textElement: textElement, data: noteData };
+      currentEditingNote = { 
+        element: noteElement, 
+        textElement: textElement, 
+        data: noteData,
+        originalColor: noteData.color
+      };
       document.getElementById('editTextarea').value = textElement.innerText;
+      currentEditColor = noteData.color;
+      
+      // Set warna textarea modal sesuai warna catatan
+      document.getElementById('editTextarea').style.color = noteData.color;
+      document.getElementById('editTextarea').style.borderColor = noteData.color + '50';
+      
+      // Set pilihan warna di modal
+      document.querySelectorAll('.modal-color-option').forEach(opt => {
+        opt.classList.remove('selected');
+        if (opt.style.backgroundColor === noteData.color) {
+          opt.classList.add('selected');
+        }
+      });
+      
       document.getElementById('editModal').classList.add('active');
       
       setTimeout(() => {
@@ -1604,6 +1761,9 @@
 
     function closeEditModal() {
       document.getElementById('editModal').classList.remove('active');
+      // Reset warna textarea
+      document.getElementById('editTextarea').style.color = '';
+      document.getElementById('editTextarea').style.borderColor = '';
       currentEditingNote = null;
     }
 
@@ -1612,6 +1772,14 @@
         const newText = document.getElementById('editTextarea').value.trim();
         if (newText !== "") {
           currentEditingNote.textElement.innerText = newText;
+          currentEditingNote.textElement.style.color = currentEditColor;
+          
+          // Update data note
+          currentEditingNote.data.color = currentEditColor;
+          
+          // Update border kiri dengan warna baru
+          currentEditingNote.element.style.borderLeftColor = currentEditColor;
+          
           saveNotes();
           closeEditModal();
           
@@ -1619,6 +1787,9 @@
           setTimeout(() => {
             currentEditingNote.element.style.animation = 'pulse 0.6s ease';
           }, 10);
+          
+          // Check achievement warna
+          checkAchievements();
         } else {
           alert("Catatan tidak boleh kosong!");
         }
@@ -1669,10 +1840,11 @@
     function saveNotes() {
       let notes = [];
       document.querySelectorAll(".note").forEach(note => {
-        const text = note.querySelector("p").innerText;
+        const textElement = note.querySelector(".note-text");
+        const text = textElement.innerText;
         const date = note.querySelector(".note-date").innerText;
         const pinned = note.classList.contains('pinned');
-        const color = note.style.borderLeftColor || '#6366f1';
+        const color = textElement.style.color || '#6366f1';
         
         // Find original data to preserve timestamp
         const originalNotes = JSON.parse(localStorage.getItem("notes")) || [];
