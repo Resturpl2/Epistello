@@ -3,98 +3,235 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Epistello | Aplikasi Catatan Premium</title>
+  <title>Epistello · Catatan Premium</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    }
+
+    :root {
+      /* Palet Warna Eksklusif - Tidak Pasaran */
+      --bg-primary: #0f0a06;
+      --bg-secondary: #1a110b;
+      --bg-card: rgba(45, 27, 14, 0.65);
+      --bg-card-hover: rgba(60, 38, 22, 0.7);
+      --border-color: rgba(212, 163, 115, 0.12);
+      --border-hover: rgba(212, 163, 115, 0.25);
+      
+      --text-primary: #f5e6d3;
+      --text-secondary: #c9b69c;
+      --text-muted: #8a7a66;
+      --text-accent: #e8d5b8;
+      
+      --color-primary: #8b5e3c;
+      --color-secondary: #d4a373;
+      --color-accent: #2d6a4f;
+      --color-highlight: #b5835a;
+      --color-gold: #c9a87c;
+      --color-amber: #b8946a;
+      
+      --gradient-primary: linear-gradient(145deg, #8b5e3c, #b5835a);
+      --gradient-secondary: linear-gradient(145deg, #2d6a4f, #40916c);
+      --gradient-gold: linear-gradient(145deg, #d4a373, #c9a87c);
+      --gradient-bg: radial-gradient(ellipse at 30% 20%, rgba(139, 94, 60, 0.08), transparent 70%),
+                      radial-gradient(ellipse at 70% 80%, rgba(45, 106, 79, 0.06), transparent 60%);
+      
+      --shadow-primary: 0 8px 32px rgba(139, 94, 60, 0.15);
+      --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
+      --shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.4);
+      
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
     }
 
     body {
-      background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
-      color: #f0f0f0;
+      background: var(--bg-primary);
+      background-image: var(--gradient-bg);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, sans-serif;
       min-height: 100vh;
-      padding: 20px;
+      padding: 24px;
       letter-spacing: -0.01em;
       line-height: 1.6;
     }
 
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(45, 27, 14, 0.3); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: var(--color-secondary); border-radius: 10px; opacity: 0.5; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
+
     .container {
-      max-width: 800px;
+      max-width: 1024px;
       margin: 0 auto;
     }
 
+    /* Glass Effect */
+    .glass {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-color);
+    }
+
+    /* Header */
     header {
       text-align: center;
-      margin-bottom: 40px;
-      padding-top: 20px;
+      margin-bottom: 28px;
+      padding: 20px 0 12px;
+      position: relative;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
     }
 
     .logo {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      margin-bottom: 16px;
+      gap: 16px;
+      margin-bottom: 8px;
     }
 
     .logo-icon {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-      border-radius: 10px;
+      width: 52px;
+      height: 52px;
+      background: var(--gradient-primary);
+      border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
-      font-weight: bold;
-      font-size: 20px;
-      animation: float 3s ease-in-out infinite;
+      color: #f5e6d3;
+      font-size: 24px;
+      box-shadow: var(--shadow-primary);
+      transition: all 0.4s ease;
+      position: relative;
+      font-family: 'Cormorant Garamond', serif;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
+    .logo-icon::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 20px;
+      background: var(--gradient-primary);
+      opacity: 0.15;
+      filter: blur(12px);
+      z-index: -1;
+    }
+
+    .logo-icon:hover {
+      transform: scale(1.05) rotate(-3deg);
+      box-shadow: 0 12px 48px rgba(139, 94, 60, 0.25);
     }
 
     h1 {
-      font-size: 36px;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.03em;
-      background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-size: 40px;
+      font-weight: 700;
       font-family: 'Outfit', sans-serif;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, #f5e6d3 0%, #d4a373 50%, #c9a87c 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.03em;
     }
 
     .subtitle {
-      color: #94a3b8;
-      font-size: 18px;
+      color: var(--text-secondary);
+      font-size: 15px;
       font-weight: 300;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(212, 163, 115, 0.06);
+      display: inline-block;
+      padding: 4px 20px;
+      border-radius: 40px;
+      border: 1px solid rgba(212, 163, 115, 0.08);
       font-family: 'Inter', sans-serif;
-      margin-top: 8px;
     }
 
+    /* Navigation Tabs */
+    .nav-tabs {
+      display: flex;
+      gap: 4px;
+      background: rgba(26, 17, 11, 0.7);
+      backdrop-filter: blur(16px);
+      border-radius: var(--radius-md);
+      padding: 6px;
+      margin-bottom: 24px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-tab {
+      flex: 1;
+      padding: 12px 20px;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      letter-spacing: 0.03em;
+    }
+
+    .nav-tab:hover {
+      color: var(--text-primary);
+      background: rgba(212, 163, 115, 0.06);
+    }
+
+    .nav-tab.active {
+      background: var(--gradient-primary);
+      color: #f5e6d3;
+      box-shadow: 0 4px 20px rgba(139, 94, 60, 0.25);
+    }
+
+    .nav-tab .badge {
+      background: rgba(255, 255, 255, 0.06);
+      padding: 1px 10px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .nav-tab.active .badge {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    /* Motivation Banner */
     .motivation-banner {
-      background: linear-gradient(90deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
-      border-radius: 12px;
-      padding: 18px;
-      margin: 20px 0;
+      background: linear-gradient(135deg, rgba(45, 27, 14, 0.7), rgba(26, 17, 11, 0.6));
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px 28px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 15px;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      gap: 16px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-card);
       position: relative;
       overflow: hidden;
     }
@@ -102,44 +239,85 @@
     .motivation-banner::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-      animation: shine 3s infinite;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 50%, rgba(139, 94, 60, 0.06), transparent 70%);
+      animation: shimmer 10s ease-in-out infinite;
     }
 
-    @keyframes shine {
-      to {
-        left: 100%;
-      }
+    @keyframes shimmer {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(8%, 5%); }
     }
 
     .motivation-text {
-      flex: 1;
       font-size: 15px;
-      font-weight: 500;
-      color: #e2e8f0;
-      font-family: 'Inter', sans-serif;
-      letter-spacing: 0.01em;
+      font-weight: 400;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
     }
 
+    .motivation-text .icon {
+      font-size: 20px;
+    }
+
+    .motivation-text span {
+      background: linear-gradient(135deg, #f5e6d3, #d4a373);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 600;
+    }
+
+    .refresh-btn {
+      background: rgba(212, 163, 115, 0.06);
+      border: 1px solid var(--border-color);
+      border-radius: 40px;
+      color: var(--text-secondary);
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      backdrop-filter: blur(4px);
+      position: relative;
+      z-index: 1;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .refresh-btn:hover {
+      background: rgba(212, 163, 115, 0.12);
+      color: var(--text-accent);
+      border-color: var(--border-hover);
+      transform: rotate(30deg);
+    }
+
+    /* Stats */
     .stats-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 15px;
-      margin-bottom: 30px;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin-bottom: 24px;
     }
 
     .stat-card {
-      background: rgba(30, 41, 59, 0.3);
-      border-radius: 12px;
-      padding: 18px;
+      background: rgba(26, 17, 11, 0.5);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px 8px;
       text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.05);
       transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
       position: relative;
       overflow: hidden;
     }
@@ -151,313 +329,472 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, #6366f1, #8b5cf6, transparent);
+      background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
+      opacity: 0.3;
     }
 
     .stat-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(99, 102, 241, 0.3);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      transform: translateY(-4px);
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
     }
 
     .stat-value {
-      font-size: 28px;
+      font-size: 24px;
       font-weight: 700;
-      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 5px;
       font-family: 'Outfit', sans-serif;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
       letter-spacing: -0.02em;
+      line-height: 1.2;
     }
 
     .stat-label {
-      font-size: 11px;
-      color: #94a3b8;
+      font-size: 9px;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.2px;
+      color: var(--text-muted);
       font-weight: 600;
-      font-family: 'Inter', sans-serif;
+      margin-top: 4px;
     }
 
+    /* Daily Quote */
+    .daily-quote {
+      background: linear-gradient(135deg, rgba(45, 27, 14, 0.5), rgba(26, 17, 11, 0.4));
+      backdrop-filter: blur(12px);
+      border-left: 3px solid var(--color-secondary);
+      border-radius: var(--radius-lg);
+      padding: 24px 32px;
+      margin-bottom: 24px;
+      position: relative;
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border-color);
+    }
+
+    .daily-quote::before {
+      content: '"';
+      position: absolute;
+      right: 28px;
+      top: 4px;
+      font-size: 80px;
+      font-family: 'Playfair Display', serif;
+      color: rgba(212, 163, 115, 0.06);
+      line-height: 1;
+    }
+
+    .quote-text {
+      font-style: italic;
+      color: var(--text-accent);
+      font-weight: 300;
+      font-size: 16px;
+      letter-spacing: 0.01em;
+      max-width: 80%;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .quote-author {
+      text-align: right;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 500;
+      margin-top: 8px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* Input Section */
     .input-section {
-      background: rgba(30, 41, 59, 0.2);
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-      margin-bottom: 30px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
+      background: rgba(26, 17, 11, 0.7);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-card);
+      display: none;
+    }
+
+    .input-section.active {
+      display: block;
+      animation: fadeSlide 0.4s ease;
+    }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .input-section .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .section-title .accent-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--color-secondary), transparent);
+      opacity: 0.3;
     }
 
     textarea {
       width: 100%;
       height: 120px;
-      border-radius: 12px;
-      padding: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-md);
+      padding: 18px 22px;
+      border: 1px solid var(--border-color);
       outline: none;
-      margin-bottom: 16px;
-      font-size: 16px;
-      background: rgba(15, 23, 42, 0.4);
-      color: #f0f0f0;
+      font-size: 15px;
+      background: rgba(15, 10, 6, 0.5);
+      color: var(--text-primary);
       resize: none;
-      transition: all 0.3s ease;
+      transition: all 0.3s;
       font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      letter-spacing: 0.01em;
+      line-height: 1.7;
       font-weight: 400;
+      letter-spacing: 0.01em;
     }
 
     textarea:focus {
-      border-color: #6366f1;
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+      border-color: var(--color-secondary);
+      box-shadow: 0 0 0 4px rgba(212, 163, 115, 0.06);
+      background: rgba(15, 10, 6, 0.6);
     }
 
     textarea::placeholder {
-      color: #64748b;
-      font-family: 'Inter', sans-serif;
+      color: var(--text-muted);
       font-weight: 300;
     }
 
-    .features-bar {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 15px;
-      flex-wrap: wrap;
+    .input-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 14px;
+      margin: 16px 0;
     }
 
-    .feature-btn {
-      background: rgba(15, 23, 42, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 8px;
-      padding: 10px 14px;
-      font-size: 13px;
-      color: #cbd5e1;
-      cursor: pointer;
-      transition: all 0.2s ease;
+    .input-option-group {
       display: flex;
-      align-items: center;
+      flex-direction: column;
       gap: 6px;
-      font-family: 'Inter', sans-serif;
-      font-weight: 500;
-      letter-spacing: 0.02em;
     }
 
-    .feature-btn:hover {
-      background: rgba(99, 102, 241, 0.1);
-      border-color: rgba(99, 102, 241, 0.3);
-      color: #a5b4fc;
+    .input-option-group label {
+      font-size: 10px;
+      color: var(--text-secondary);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .color-picker {
       display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
+      gap: 8px;
       flex-wrap: wrap;
       align-items: center;
     }
 
-    .color-label {
-      font-size: 13px;
-      color: #94a3b8;
-      font-weight: 500;
-      font-family: 'Inter', sans-serif;
-      letter-spacing: 0.03em;
-    }
-
     .color-option {
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
       border-radius: 8px;
       cursor: pointer;
       border: 2px solid transparent;
-      transition: all 0.2s ease;
-      position: relative;
+      transition: all 0.25s;
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
     }
 
     .color-option:hover {
-      transform: scale(1.15);
+      transform: scale(1.1);
     }
 
     .color-option.selected {
-      border-color: white;
-      transform: scale(1.1);
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+      border-color: var(--text-primary);
+      box-shadow: 0 0 0 2px rgba(212, 163, 115, 0.15), 0 0 20px rgba(212, 163, 115, 0.08);
+      transform: scale(1.05);
     }
 
-    .color-option .checkmark {
-      color: white;
-      font-size: 14px;
-      font-weight: bold;
+    .checkmark {
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
       opacity: 0;
-      transition: opacity 0.2s ease;
+      transition: 0.15s;
     }
 
     .color-option.selected .checkmark {
       opacity: 1;
     }
 
-    .color-name {
-      font-size: 11px;
-      color: #94a3b8;
-      margin-top: 4px;
-      text-align: center;
+    .custom-color-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.03);
+      padding: 3px 10px 3px 3px;
+      border-radius: 40px;
+      border: 1px solid var(--border-color);
+    }
+
+    .custom-color-input {
+      width: 28px;
+      height: 28px;
+      padding: 0;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: none;
+    }
+
+    .custom-color-input::-webkit-color-swatch-wrapper {
+      padding: 2px;
+    }
+
+    .custom-color-input::-webkit-color-swatch {
+      border-radius: 6px;
+      border: 2px solid rgba(255,255,255,0.06);
+    }
+
+    .custom-color-label {
+      font-size: 9px;
+      color: var(--text-muted);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    .category-select, .priority-select {
+      background: rgba(15, 10, 6, 0.5);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: var(--text-primary);
       font-family: 'Inter', sans-serif;
-      font-weight: 400;
+      font-size: 13px;
+      outline: none;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .category-select:focus, .priority-select:focus {
+      border-color: var(--color-secondary);
+    }
+
+    .category-select option, .priority-select option {
+      background: #1a110b;
+      color: var(--text-primary);
+    }
+
+    .features-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 12px 0 16px;
+    }
+
+    .feature-btn {
+      background: rgba(212, 163, 115, 0.04);
+      border: 1px solid var(--border-color);
+      border-radius: 40px;
+      padding: 8px 16px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.25s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+      backdrop-filter: blur(4px);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .feature-btn:hover {
+      background: rgba(212, 163, 115, 0.08);
+      border-color: var(--border-hover);
+      color: var(--text-accent);
+      transform: translateY(-2px);
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-      color: white;
+      background: var(--gradient-primary);
       border: none;
-      border-radius: 12px;
+      border-radius: 60px;
       padding: 14px 28px;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
+      color: #f5e6d3;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.2);
+      gap: 10px;
       width: 100%;
-      position: relative;
-      overflow: hidden;
+      box-shadow: var(--shadow-primary);
       font-family: 'Outfit', sans-serif;
       letter-spacing: 0.02em;
     }
 
-    .btn-primary::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: 0.5s;
-    }
-
-    .btn-primary:hover::before {
-      left: 100%;
-    }
-
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
+      box-shadow: 0 12px 40px rgba(139, 94, 60, 0.3);
     }
 
     .btn-primary:active {
       transform: translateY(0);
     }
 
-    .notes-header {
+    /* Search Section */
+    .search-section {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
+      gap: 12px;
+      margin-bottom: 16px;
       flex-wrap: wrap;
-      gap: 10px;
+      align-items: center;
     }
 
-    h2 {
-      font-size: 26px;
-      font-weight: 700;
-      color: #f8fafc;
-      font-family: 'Outfit', sans-serif;
-      letter-spacing: -0.02em;
+    .search-input {
+      flex: 1;
+      min-width: 180px;
+      padding: 12px 20px;
+      background: rgba(15, 10, 6, 0.5);
+      border: 1px solid var(--border-color);
+      border-radius: 40px;
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    .search-input:focus {
+      border-color: var(--color-secondary);
+      box-shadow: 0 0 0 4px rgba(212, 163, 115, 0.05);
+    }
+
+    .search-input::placeholder {
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    .date-filter-group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .date-filter-input {
+      padding: 10px 16px;
+      background: rgba(15, 10, 6, 0.5);
+      border: 1px solid var(--border-color);
+      border-radius: 40px;
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      outline: none;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .date-filter-input:focus {
+      border-color: var(--color-secondary);
+    }
+
+    .date-filter-input::-webkit-calendar-picker-indicator {
+      filter: invert(0.6);
+      cursor: pointer;
     }
 
     .filter-options {
       display: flex;
-      gap: 10px;
-      margin-bottom: 15px;
+      gap: 6px;
+      flex-wrap: wrap;
     }
 
     .filter-btn {
-      background: rgba(15, 23, 42, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 20px;
+      background: rgba(212, 163, 115, 0.04);
+      border: 1px solid var(--border-color);
+      border-radius: 40px;
       padding: 8px 16px;
-      font-size: 13px;
-      color: #94a3b8;
+      font-size: 11px;
+      color: var(--text-secondary);
       cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: 'Inter', sans-serif;
+      transition: all 0.25s;
       font-weight: 500;
-      letter-spacing: 0.03em;
-    }
-
-    .filter-btn.active {
-      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-      color: white;
-      border-color: transparent;
-      font-weight: 600;
-    }
-
-    .notes-count {
-      background: rgba(15, 23, 42, 0.4);
-      color: #94a3b8;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 500;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(4px);
       font-family: 'Inter', sans-serif;
       letter-spacing: 0.02em;
     }
 
+    .filter-btn.active {
+      background: var(--gradient-primary);
+      color: #f5e6d3;
+      border-color: transparent;
+      box-shadow: 0 4px 16px rgba(139, 94, 60, 0.15);
+    }
+
+    .filter-btn:hover:not(.active) {
+      border-color: var(--border-hover);
+      color: var(--text-accent);
+    }
+
+    .notes-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: 22px;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .notes-count {
+      background: rgba(212, 163, 115, 0.06);
+      padding: 6px 18px;
+      border-radius: 40px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      font-weight: 500;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Notes List */
     .notes-list {
       display: grid;
-      gap: 16px;
+      gap: 14px;
     }
 
     .note {
-      background: rgba(30, 41, 59, 0.2);
-      border-radius: 16px;
-      padding: 22px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      transition: all 0.3s ease;
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border-radius: var(--radius-md);
+      padding: 22px 26px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-card);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
-      backdrop-filter: blur(10px);
-      animation: slideIn 0.4s ease-out;
-    }
-
-    .note.pinned {
-      border-color: rgba(245, 158, 11, 0.3);
-      background: rgba(30, 41, 59, 0.3);
-    }
-
-    .pin-indicator {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      color: #f59e0b;
-    }
-
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .note:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-      border-color: rgba(99, 102, 241, 0.2);
+      animation: slideIn 0.4s ease;
     }
 
     .note::before {
@@ -465,216 +802,195 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 5px;
+      width: 4px;
       height: 100%;
-      background: linear-gradient(to bottom, #6366f1, #8b5cf6);
+      background: var(--gradient-primary);
+      border-radius: var(--radius-md) 0 0 var(--radius-md);
     }
 
-    .note-content {
-      margin-bottom: 12px;
+    .note:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-hover);
+      background: var(--bg-card-hover);
     }
+
+    .note.pinned {
+      background: rgba(45, 27, 14, 0.7);
+      border-color: rgba(212, 163, 115, 0.15);
+    }
+
+    .note.pinned::after {
+      content: "📌";
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      font-size: 14px;
+      opacity: 0.4;
+    }
+
+    .note-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      gap: 12px;
+    }
+
+    .note-category {
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 3px 12px;
+      border-radius: 20px;
+      background: rgba(212, 163, 115, 0.1);
+      color: var(--color-secondary);
+    }
+
+    .note-category.work { background: rgba(45, 106, 79, 0.15); color: #40916c; }
+    .note-category.personal { background: rgba(212, 163, 115, 0.12); color: var(--color-secondary); }
+    .note-category.idea { background: rgba(212, 163, 115, 0.08); color: var(--color-gold); }
+    .note-category.todo { background: rgba(45, 106, 79, 0.12); color: #52b788; }
+    .note-category.important { background: rgba(139, 94, 60, 0.15); color: #b5835a; }
+
+    .note-priority {
+      font-size: 9px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.03);
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .note-priority.high { background: rgba(139, 94, 60, 0.15); color: #b5835a; }
+    .note-priority.medium { background: rgba(212, 163, 115, 0.1); color: var(--color-gold); }
+    .note-priority.low { background: rgba(45, 106, 79, 0.12); color: #40916c; }
 
     .note-text {
-      margin: 0;
-      padding: 0;
-      line-height: 1.7;
-      color: #e2e8f0;
-      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--text-accent);
       font-weight: 400;
       letter-spacing: 0.01em;
-      font-size: 15px;
-      transition: color 0.3s ease;
+      margin-bottom: 6px;
+      white-space: pre-wrap;
+      word-break: break-word;
     }
 
     .note-date {
-      font-size: 11px;
-      color: #94a3b8;
-      margin-top: 8px;
+      font-size: 10px;
+      color: var(--text-muted);
       font-family: 'JetBrains Mono', monospace;
-      font-weight: 400;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.04em;
+      margin-top: 4px;
+    }
+
+    .note-reminder {
+      font-size: 10px;
+      color: var(--color-gold);
+      font-family: 'JetBrains Mono', monospace;
+      margin-left: 12px;
     }
 
     .actions {
       display: flex;
-      gap: 8px;
-      margin-top: 16px;
+      gap: 6px;
+      margin-top: 12px;
       flex-wrap: wrap;
     }
 
     .btn-secondary {
-      background: rgba(15, 23, 42, 0.4);
-      color: #cbd5e1;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 8px;
-      padding: 10px 18px;
-      font-size: 13px;
+      background: rgba(212, 163, 115, 0.04);
+      border: 1px solid var(--border-color);
+      border-radius: 40px;
+      padding: 6px 14px;
+      font-size: 11px;
+      color: var(--text-secondary);
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.25s;
       display: flex;
       align-items: center;
-      gap: 6px;
-      flex: 1;
-      justify-content: center;
-      font-family: 'Inter', sans-serif;
+      gap: 5px;
       font-weight: 500;
-      letter-spacing: 0.02em;
-      min-height: 40px;
+      backdrop-filter: blur(4px);
+      font-family: 'Inter', sans-serif;
     }
 
     .btn-secondary:hover {
-      background: rgba(99, 102, 241, 0.1);
-      color: #a5b4fc;
-      border-color: rgba(99, 102, 241, 0.3);
+      background: rgba(212, 163, 115, 0.08);
+      color: var(--text-accent);
+      border-color: var(--border-hover);
     }
 
     .btn-danger {
-      background: rgba(127, 29, 29, 0.2);
-      color: #fca5a5;
-      border: 1px solid rgba(248, 113, 113, 0.1);
-      border-radius: 8px;
-      padding: 10px 18px;
-      font-size: 13px;
+      background: rgba(139, 94, 60, 0.06);
+      border: 1px solid rgba(139, 94, 60, 0.08);
+      border-radius: 40px;
+      padding: 6px 14px;
+      font-size: 11px;
+      color: #b5835a;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.25s;
       display: flex;
       align-items: center;
-      gap: 6px;
-      flex: 1;
-      justify-content: center;
-      font-family: 'Inter', sans-serif;
+      gap: 5px;
       font-weight: 500;
-      letter-spacing: 0.02em;
-      min-height: 40px;
     }
 
     .btn-danger:hover {
-      background: rgba(127, 29, 29, 0.3);
-      color: #f87171;
-      border-color: rgba(248, 113, 113, 0.2);
+      background: rgba(139, 94, 60, 0.12);
+      color: #c9a07a;
+      border-color: rgba(139, 94, 60, 0.15);
     }
 
+    /* Empty State */
     .empty-state {
       text-align: center;
-      padding: 60px 20px;
-      color: #64748b;
-      background: rgba(30, 41, 59, 0.2);
-      border-radius: 16px;
-      border: 1px dashed rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
+      padding: 48px 20px;
+      background: rgba(26, 17, 11, 0.3);
+      border-radius: var(--radius-lg);
+      border: 1px dashed var(--border-color);
+      backdrop-filter: blur(4px);
+    }
+
+    .empty-state .icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.3;
     }
 
     .empty-state h3 {
       font-family: 'Outfit', sans-serif;
       font-weight: 600;
-      color: #e2e8f0;
-      margin-bottom: 12px;
-      font-size: 20px;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      font-size: 18px;
     }
 
     .empty-state p {
-      font-family: 'Inter', sans-serif;
+      color: var(--text-muted);
       font-weight: 300;
-      font-size: 15px;
-      max-width: 400px;
-      margin: 0 auto;
+      font-size: 14px;
     }
 
-    .empty-state svg {
-      width: 80px;
-      opacity: 0.5;
-      margin-bottom: 24px;
-    }
-
-    .daily-quote {
-      background: rgba(30, 41, 59, 0.2);
-      border-radius: 12px;
-      padding: 24px;
-      margin: 20px 0;
-      border-left: 4px solid #6366f1;
-      backdrop-filter: blur(10px);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .daily-quote::before {
-      content: '"';
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      font-size: 80px;
-      color: rgba(99, 102, 241, 0.1);
-      font-family: 'Outfit', serif;
-      font-weight: 800;
-    }
-
-    .quote-text {
-      font-style: italic;
-      color: #e2e8f0;
-      margin-bottom: 12px;
-      font-size: 15px;
-      line-height: 1.7;
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      letter-spacing: 0.01em;
-    }
-
-    .quote-author {
-      text-align: right;
-      color: #94a3b8;
-      font-size: 13px;
-      font-family: 'Inter', sans-serif;
-      font-weight: 500;
-      letter-spacing: 0.03em;
-    }
-
-    .achievement-badge {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      color: white;
-      padding: 18px;
-      border-radius: 12px;
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
-      display: none;
-      align-items: center;
-      gap: 12px;
-      z-index: 1000;
-      animation: slideInRight 0.5s ease-out;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      font-family: 'Outfit', sans-serif;
-      max-width: 300px;
-    }
-
-    @keyframes slideInRight {
-      from {
-        transform: translateX(100%);
-        opacity: 0;
-      }
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
-
-    /* Modal Styles */
+    /* Modals */
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(10, 6, 4, 0.8);
+      backdrop-filter: blur(16px);
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 1000;
       opacity: 0;
       visibility: hidden;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(5px);
+      transition: all 0.35s;
     }
 
     .modal-overlay.active {
@@ -683,176 +999,112 @@
     }
 
     .modal {
-      background: rgba(30, 41, 59, 0.95);
-      border-radius: 16px;
+      background: rgba(26, 17, 11, 0.95);
+      backdrop-filter: blur(24px);
+      border-radius: var(--radius-lg);
       padding: 32px;
       width: 90%;
-      max-width: 500px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transform: scale(0.8) translateY(-20px);
-      opacity: 0;
+      max-width: 540px;
+      border: 1px solid var(--border-color);
+      transform: scale(0.92) translateY(16px);
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      backdrop-filter: blur(20px);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
     }
 
     .modal-overlay.active .modal {
       transform: scale(1) translateY(0);
-      opacity: 1;
     }
 
     .modal-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 24px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
     }
 
     .modal-title {
-      font-size: 22px;
+      font-size: 18px;
       font-weight: 700;
-      color: #f8fafc;
+      color: var(--text-primary);
       display: flex;
       align-items: center;
       gap: 10px;
       font-family: 'Outfit', sans-serif;
-      letter-spacing: -0.01em;
     }
 
     .modal-close {
       background: none;
       border: none;
-      color: #94a3b8;
-      font-size: 24px;
+      color: var(--text-muted);
+      font-size: 22px;
       cursor: pointer;
-      transition: color 0.2s ease;
+      transition: 0.2s;
       width: 36px;
       height: 36px;
-      border-radius: 50%;
+      border-radius: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .modal-close:hover {
-      color: #f87171;
-      background: rgba(248, 113, 113, 0.1);
-    }
-
-    .modal-body {
-      margin-bottom: 28px;
-    }
-
-    .modal-text {
-      color: #cbd5e1;
-      line-height: 1.6;
-      margin-bottom: 20px;
-      font-family: 'Inter', sans-serif;
-      font-weight: 400;
-      letter-spacing: 0.01em;
+      color: #b5835a;
+      background: rgba(139, 94, 60, 0.06);
     }
 
     .modal-textarea {
       width: 100%;
-      height: 140px;
-      border-radius: 12px;
-      padding: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      height: 110px;
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      border: 1px solid var(--border-color);
       outline: none;
-      font-size: 16px;
-      background: rgba(15, 23, 42, 0.4);
-      color: #f8fafc;
+      font-size: 14px;
+      background: rgba(15, 10, 6, 0.5);
+      color: var(--text-primary);
       resize: none;
-      transition: all 0.3s ease;
+      transition: 0.25s;
       font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      letter-spacing: 0.01em;
+      line-height: 1.7;
     }
 
     .modal-textarea:focus {
-      border-color: #6366f1;
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-    }
-
-    .modal-actions {
-      display: flex;
-      gap: 12px;
-      justify-content: flex-end;
-    }
-
-    .modal-btn {
-      padding: 12px 24px;
-      border: none;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: 'Inter', sans-serif;
-      letter-spacing: 0.02em;
-      min-height: 44px;
-    }
-
-    .modal-btn-cancel {
-      background: rgba(255, 255, 255, 0.1);
-      color: #cbd5e1;
-    }
-
-    .modal-btn-cancel:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .modal-btn-confirm {
-      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-      color: white;
-    }
-
-    .modal-btn-confirm:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
-    }
-
-    .modal-btn-danger {
-      background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
-      color: white;
-    }
-
-    .modal-btn-danger:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(220, 38, 38, 0.3);
+      border-color: var(--color-secondary);
+      box-shadow: 0 0 0 4px rgba(212, 163, 115, 0.05);
     }
 
     .modal-color-picker {
       display: flex;
-      gap: 10px;
-      margin: 20px 0;
+      gap: 8px;
+      margin: 14px 0 10px;
       flex-wrap: wrap;
+      align-items: center;
     }
 
     .modal-color-option {
       width: 28px;
       height: 28px;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
       border: 2px solid transparent;
-      transition: all 0.2s ease;
+      transition: 0.2s;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .modal-color-option.selected {
-      border-color: white;
-      transform: scale(1.1);
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+      border-color: var(--text-primary);
+      transform: scale(1.06);
+      box-shadow: 0 0 16px rgba(212, 163, 115, 0.1);
     }
 
-    .modal-color-option .modal-checkmark {
-      color: white;
-      font-size: 12px;
-      font-weight: bold;
+    .modal-checkmark {
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
       opacity: 0;
     }
 
@@ -860,1053 +1112,1314 @@
       opacity: 1;
     }
 
-    /* Delete Animation */
-    .note.deleting {
-      animation: slideOut 0.4s ease-in forwards;
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 12px;
     }
 
-    @keyframes slideOut {
-      from {
-        opacity: 1;
-        transform: translateX(0);
-      }
-      to {
-        opacity: 0;
-        transform: translateX(-100%);
-      }
+    .modal-btn {
+      padding: 10px 22px;
+      border: none;
+      border-radius: 40px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.25s;
+      font-family: 'Inter', sans-serif;
     }
 
-    /* Footer Styles */
-    footer {
-      margin-top: 60px;
+    .modal-btn-cancel {
+      background: rgba(212, 163, 115, 0.06);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+    }
+
+    .modal-btn-cancel:hover {
+      background: rgba(212, 163, 115, 0.1);
+    }
+
+    .modal-btn-confirm {
+      background: var(--gradient-primary);
+      color: #f5e6d3;
+      box-shadow: var(--shadow-primary);
+    }
+
+    .modal-btn-confirm:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(139, 94, 60, 0.2);
+    }
+
+    .modal-btn-danger {
+      background: linear-gradient(145deg, #8b5e3c, #a0704a);
+      color: #f5e6d3;
+    }
+
+    .modal-btn-danger:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(139, 94, 60, 0.15);
+    }
+
+    /* Achievement Badge */
+    .achievement-badge {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: linear-gradient(145deg, #2d1b0e, #1a110b);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(212, 163, 115, 0.08);
+      padding: 16px 22px;
+      border-radius: var(--radius-md);
+      display: none;
+      align-items: center;
+      gap: 14px;
+      box-shadow: var(--shadow-hover);
+      z-index: 999;
+      animation: slideInRight 0.5s ease;
+      max-width: 300px;
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(120%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    .achievement-badge .icon { font-size: 28px; }
+    .achievement-badge strong { color: var(--color-gold); font-family: 'Outfit', sans-serif; }
+    .achievement-badge .desc { font-size: 12px; color: var(--text-muted); }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(26, 17, 11, 0.95);
+      backdrop-filter: blur(16px);
+      padding: 12px 28px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      font-weight: 500;
+      font-size: 13px;
+      box-shadow: var(--shadow-hover);
+      z-index: 2000;
+      display: none;
+      animation: slideUp 0.4s ease;
+      max-width: 90%;
+      font-family: 'Inter', sans-serif;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateX(-50%) translateY(24px); opacity: 0; }
+      to { transform: translateX(-50%) translateY(0); opacity: 1; }
+    }
+
+    /* Stats Detail Section */
+    #statsSection {
+      display: none;
+      padding: 8px 0 20px;
+    }
+
+    #statsSection.active {
+      display: block;
+      animation: fadeSlide 0.4s ease;
+    }
+
+    .stats-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .stat-detail-card {
+      background: rgba(26, 17, 11, 0.5);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 18px 14px;
       text-align: center;
-      color: #64748b;
-      font-size: 14px;
-      padding: 20px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s;
+    }
+
+    .stat-detail-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+
+    .stat-detail-value {
+      font-size: 28px;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .stat-detail-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .activity-log {
+      background: rgba(26, 17, 11, 0.4);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      border: 1px solid var(--border-color);
+      max-height: 220px;
+      overflow-y: auto;
+    }
+
+    .activity-log h4 {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-size: 13px;
+      margin-bottom: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .activity-item {
+      display: flex;
+      gap: 14px;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(212, 163, 115, 0.04);
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .activity-item .time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      min-width: 50px;
+    }
+
+    .activity-item .msg { color: var(--text-accent); }
+
+    /* Archive Section */
+    #archiveSection {
+      display: none;
+    }
+
+    #archiveSection.active {
+      display: block;
+      animation: fadeSlide 0.4s ease;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 48px;
+      padding: 24px 0 12px;
+      border-top: 1px solid var(--border-color);
     }
 
     .footer-content {
       display: flex;
       flex-direction: column;
-      gap: 24px;
       align-items: center;
+      gap: 16px;
     }
 
     .copyright {
-      margin-bottom: 12px;
-      font-family: 'Inter', sans-serif;
+      color: var(--text-muted);
       font-weight: 300;
-      letter-spacing: 0.02em;
+      font-size: 13px;
+      letter-spacing: 0.04em;
     }
 
     .copyright b {
-      font-weight: 700;
-      background: linear-gradient(135deg, #a5b4fc 0%, #8b5cf6 100%);
+      font-weight: 600;
+      background: var(--gradient-primary);
       -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
       background-clip: text;
-      font-family: 'Outfit', sans-serif;
+      -webkit-text-fill-color: transparent;
     }
 
     .support-section {
-      background: rgba(30, 41, 59, 0.2);
-      border-radius: 12px;
-      padding: 24px;
+      background: rgba(26, 17, 11, 0.4);
+      backdrop-filter: blur(8px);
+      border-radius: var(--radius-md);
+      padding: 18px 24px;
       width: 100%;
       max-width: 400px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-color);
     }
 
     .support-title {
-      color: #a5b4fc;
-      font-size: 16px;
+      color: var(--text-secondary);
       font-weight: 600;
-      margin-bottom: 18px;
+      font-size: 13px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      font-family: 'Outfit', sans-serif;
-      letter-spacing: 0.01em;
+      margin-bottom: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
     .contact-links {
       display: flex;
-      flex-direction: column;
-      gap: 12px;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
     .contact-link {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 12px;
-      padding: 12px 18px;
-      background: rgba(15, 23, 42, 0.4);
-      border-radius: 8px;
-      color: #cbd5e1;
+      gap: 8px;
+      padding: 8px 18px;
+      background: rgba(212, 163, 115, 0.04);
+      border-radius: 40px;
+      color: var(--text-secondary);
       text-decoration: none;
-      transition: all 0.3s ease;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      font-family: 'Inter', sans-serif;
+      transition: 0.25s;
+      border: 1px solid var(--border-color);
       font-weight: 500;
-      letter-spacing: 0.02em;
+      font-size: 12px;
     }
 
     .contact-link:hover {
-      background: rgba(99, 102, 241, 0.1);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-      color: #a5b4fc;
-      border-color: rgba(99, 102, 241, 0.3);
+      background: rgba(212, 163, 115, 0.08);
+      color: var(--text-accent);
+      border-color: var(--border-hover);
     }
 
-    .whatsapp-link:hover {
-      color: #25D366;
+    .whatsapp-link:hover { color: #6fcf97; }
+    .instagram-link:hover { color: #f0a0b0; }
+
+    /* Animations */
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .instagram-link:hover {
-      color: #E4405F;
+    .note.deleting {
+      animation: slideOut 0.35s ease-in forwards;
     }
 
-    .contact-icon {
-      width: 20px;
-      height: 20px;
+    @keyframes slideOut {
+      from { opacity: 1; transform: translateX(0); }
+      to { opacity: 0; transform: translateX(-40px); }
     }
 
-    /* Responsive Design */
-    @media (min-width: 640px) {
-      .btn-primary {
-        width: auto;
-      }
-      
-      .actions {
-        flex-wrap: nowrap;
-      }
-      
-      .btn-secondary, .btn-danger {
-        flex: none;
-        min-width: 100px;
-      }
-
-      .contact-links {
-        flex-direction: row;
-        justify-content: center;
-      }
-
-      .contact-link {
-        flex: 1;
-        max-width: 180px;
-      }
-
-      .modal-actions {
-        justify-content: flex-end;
-      }
+    /* Responsive */
+    @media (max-width: 820px) {
+      .stats-container { grid-template-columns: repeat(3, 1fr); }
+      .input-options { grid-template-columns: 1fr 1fr; }
+      .quote-text { max-width: 85%; }
+      .search-section { flex-direction: column; }
+      .date-filter-group { width: 100%; }
+      .date-filter-input { flex: 1; }
     }
 
     @media (max-width: 480px) {
-      body {
-        padding: 15px;
-      }
-      
-      .container {
-        padding: 0 5px;
-      }
-      
-      h1 {
-        font-size: 30px;
-      }
-      
-      .subtitle {
-        font-size: 16px;
-      }
-      
-      .input-section {
-        padding: 20px 16px;
-      }
-      
-      .note {
-        padding: 18px;
-      }
-      
-      .notes-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .support-section {
-        padding: 20px;
-      }
-
-      .modal {
-        padding: 24px;
-        margin: 20px;
-      }
-
-      .modal-actions {
-        flex-direction: column;
-      }
-
-      .stats-container {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .color-picker {
-        justify-content: center;
-      }
-
-      .features-bar {
-        justify-content: center;
-      }
+      body { padding: 16px; }
+      h1 { font-size: 28px; }
+      .stats-container { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+      .stat-card { padding: 12px 4px; }
+      .stat-value { font-size: 18px; }
+      .input-section { padding: 16px; }
+      .input-options { grid-template-columns: 1fr; }
+      .modal { padding: 20px; }
+      .note { padding: 16px 18px; }
+      .nav-tab { font-size: 11px; padding: 8px 10px; }
+      .daily-quote { padding: 16px 20px; }
+      .quote-text { font-size: 14px; max-width: 100%; }
+      .motivation-banner { flex-direction: column; text-align: center; padding: 16px 20px; }
+      .note-header { flex-wrap: wrap; }
     }
 
     @media (max-width: 360px) {
-      h1 {
-        font-size: 26px;
-      }
-      
-      .logo {
-        flex-direction: column;
-        gap: 8px;
-      }
-      
-      .input-section {
-        padding: 16px 12px;
-      }
-      
-      textarea {
-        padding: 14px;
-        font-size: 15px;
-      }
-
-      .contact-links {
-        flex-direction: column;
-      }
-
-      .stats-container {
-        grid-template-columns: 1fr;
-      }
+      .stats-container { grid-template-columns: 1fr 1fr; }
+      .stat-value { font-size: 16px; }
+      .note-text { font-size: 13px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="logo">
-        <div class="logo-icon">🦅</div>
-        <h1>Epistello</h1>
-      </div>
-      <p class="subtitle">Aplikasi catatan premium untuk produktivitas Anda</p>
-    </header>
+<div class="container">
 
-    <!-- Banner Motivasi -->
-    <div class="motivation-banner" id="motivationBanner">
-      <div class="motivation-text">🎯 <span id="motivationText">Tulis satu ide hari ini, ciptakan masa depan esok!</span></div>
-      <button onclick="changeMotivation()" style="background: none; border: none; color: #a5b4fc; cursor: pointer; padding: 6px; border-radius: 50%; transition: background 0.2s ease;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2"/>
-          <path d="M12 8V16M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </button>
+  <header>
+    <div class="logo">
+      <div class="logo-icon">✦</div>
+      <h1>Epistello</h1>
     </div>
+    <p class="subtitle">Catatan Premium · Elegan & Autentik</p>
+  </header>
 
-    <!-- Statistik -->
-    <div class="stats-container">
-      <div class="stat-card">
-        <div class="stat-value" id="totalNotes">0</div>
-        <div class="stat-label">Total Catatan</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value" id="todayNotes">0</div>
-        <div class="stat-label">Hari Ini</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value" id="pinnedNotes">0</div>
-        <div class="stat-label">Disematkan</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value" id="streakDays">0</div>
-        <div class="stat-label">Hari Berturut-turut</div>
-      </div>
-    </div>
-
-    <!-- Kutipan Harian -->
-    <div class="daily-quote">
-      <div class="quote-text" id="dailyQuote">"Kata-kata yang ditulis hari ini adalah sejarah yang akan dibaca esok."</div>
-      <div class="quote-author" id="quoteAuthor">- Epistello</div>
-    </div>
-
-    <section class="input-section">
-      <textarea id="noteInput" placeholder="Tulis catatan Anda di sini..."></textarea>
-      
-      <!-- Fitur Warna -->
-      <div class="color-picker">
-        <div class="color-label">Pilih warna teks:</div>
-        <div>
-          <div class="color-option selected" style="background: #6366f1;" onclick="selectColor('#6366f1')" data-name="Indigo">
-            <div class="checkmark">✓</div>
-          </div>
-          <div class="color-name">Indigo</div>
-        </div>
-        <div>
-          <div class="color-option" style="background: #10b981;" onclick="selectColor('#10b981')" data-name="Emerald">
-            <div class="checkmark">✓</div>
-          </div>
-          <div class="color-name">Emerald</div>
-        </div>
-        <div>
-          <div class="color-option" style="background: #f59e0b;" onclick="selectColor('#f59e0b')" data-name="Amber">
-            <div class="checkmark">✓</div>
-          </div>
-          <div class="color-name">Amber</div>
-        </div>
-        <div>
-          <div class="color-option" style="background: #8b5cf6;" onclick="selectColor('#8b5cf6')" data-name="Violet">
-            <div class="checkmark">✓</div>
-          </div>
-          <div class="color-name">Violet</div>
-        </div>
-        <div>
-          <div class="color-option" style="background: #ec4899;" onclick="selectColor('#ec4899')" data-name="Pink">
-            <div class="checkmark">✓</div>
-          </div>
-          <div class="color-name">Pink</div>
-        </div>
-        <div>
-          <div class="color-option" style="background: #3b82f6;" onclick="selectColor('#3b82f6')" data-name="Blue">
-            <div class="checkmark">✓</div>
-          </div>
-          <div class="color-name">Blue</div>
-        </div>
-        <div>
-          <div class="color-option" style="background: #06b6d4;" onclick="selectColor('#06b6d4')" data-name="Cyan">
-            <div class="checkmark">✓</div>
-          </div>
-          <div class="color-name">Cyan</div>
-        </div>
-      </div>
-
-      <!-- Fitur Tambahan -->
-      <div class="features-bar">
-        <button class="feature-btn" onclick="addTimestamp()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/>
-            <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Tambah Waktu
-        </button>
-        <button class="feature-btn" onclick="addTodoList()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Checklist
-        </button>
-      </div>
-
-      <button class="btn-primary" onclick="addNote()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 4V20M4 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        Tambah Catatan
-      </button>
-    </section>
-
-    <section class="notes-section">
-      <div class="notes-header">
-        <h2>Catatan Saya</h2>
-        <div class="filter-options">
-          <button class="filter-btn active" onclick="filterNotes('all')">Semua</button>
-          <button class="filter-btn" onclick="filterNotes('pinned')">Disematkan</button>
-          <button class="filter-btn" onclick="filterNotes('today')">Hari Ini</button>
-        </div>
-        <div class="notes-count" id="notesCount">0 catatan</div>
-      </div>
-      <div class="notes-list" id="notesList">
-        <!-- Catatan akan ditampilkan di sini -->
-      </div>
-    </section>
-
-    <!-- Badge Prestasi -->
-    <div class="achievement-badge" id="achievementBadge">
-      <div>🏆</div>
-      <div>
-        <strong id="achievementTitle">Prestasi Baru!</strong>
-        <div id="achievementDesc" style="font-size: 12px;"></div>
-      </div>
-    </div>
-
-    <footer>
-      <div class="footer-content">
-        <div class="copyright">
-          © 2025 <b>Epistello</b> - Aplikasi Catatan Premium
-        </div>
-        
-        <div class="support-section">
-          <div class="support-title">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/>
-              <path d="M9 9H9.01M15 9H15.01M8.8 13.8C9.83967 14.9095 11.1597 15.9095 12.2 15.9095C13.2403 15.9095 14.5603 14.9095 15.6 13.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            Laporkan Bug & Saran
-          </div>
-          <div class="contact-links">
-            <a href="https://wa.me/6285604047346?text=Halo%20saya%20ingin%20melaporkan%20bug/memberi%20saran%20untuk%20Epistello" class="contact-link whatsapp-link" target="_blank">
-              <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893c0-3.189-1.248-6.189-3.515-8.444"/>
-              </svg>
-              WhatsApp
-            </a>
-            <a href="https://instagram.com/_rezxx1" class="contact-link instagram-link" target="_blank">
-              <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-              @Rezxx1
-            </a>
-          </div>
-        </div>
-      </div>
-    </footer>
+  <!-- Navigation -->
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchTab('notes', this)">
+      📋 Catatan <span class="badge" id="totalBadge">0</span>
+    </button>
+    <button class="nav-tab" onclick="switchTab('add', this)">
+      ✏️ Tulis Baru
+    </button>
+    <button class="nav-tab" onclick="switchTab('stats', this)">
+      📊 Statistik
+    </button>
+    <button class="nav-tab" onclick="switchTab('archive', this)">
+      📦 Arsip <span class="badge" id="archiveBadge">0</span>
+    </button>
   </div>
 
-  <!-- Modal untuk Edit -->
-  <div class="modal-overlay" id="editModal">
-    <div class="modal">
-      <div class="modal-header">
-        <h3 class="modal-title">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M11 4H4C3.46957 4 2.96086 4.21071 2.58579 4.58579C2.21071 4.96086 2 5.46957 2 6V20C2 20.5304 2.21071 21.0391 2.58579 21.4142C2.96086 21.7893 3.46957 22 4 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M18.5 2.5C18.8978 2.10217 19.4374 1.87868 20 1.87868C20.5626 1.87868 21.1022 2.10217 21.5 2.5C21.8978 2.89782 22.1213 3.43739 22.1213 4C22.1213 4.56261 21.8978 5.10217 21.5 5.5L12 15L8 16L9 12L18.5 2.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Edit Catatan
-        </h3>
-        <button class="modal-close" onclick="closeEditModal()">&times;</button>
-      </div>
-      <div class="modal-body">
-        <textarea class="modal-textarea" id="editTextarea" placeholder="Edit catatan Anda..."></textarea>
-        <div class="modal-color-picker">
-          <div class="modal-color-option selected" style="background: #6366f1;" onclick="selectEditColor('#6366f1')">
-            <div class="modal-checkmark">✓</div>
-          </div>
-          <div class="modal-color-option" style="background: #10b981;" onclick="selectEditColor('#10b981')">
-            <div class="modal-checkmark">✓</div>
-          </div>
-          <div class="modal-color-option" style="background: #f59e0b;" onclick="selectEditColor('#f59e0b')">
-            <div class="modal-checkmark">✓</div>
-          </div>
-          <div class="modal-color-option" style="background: #8b5cf6;" onclick="selectEditColor('#8b5cf6')">
-            <div class="modal-checkmark">✓</div>
-          </div>
-          <div class="modal-color-option" style="background: #ec4899;" onclick="selectEditColor('#ec4899')">
-            <div class="modal-checkmark">✓</div>
+  <!-- Motivation Banner -->
+  <div class="motivation-banner">
+    <div class="motivation-text">
+      <span class="icon">✦</span>
+      <span id="motivationText">Tulis satu ide hari ini, ciptakan masa depan esok!</span>
+    </div>
+    <button class="refresh-btn" onclick="changeMotivation()">⟳ Ganti</button>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-container" id="statsContainer">
+    <div class="stat-card"><div class="stat-value" id="totalNotes">0</div><div class="stat-label">Total</div></div>
+    <div class="stat-card"><div class="stat-value" id="todayNotes">0</div><div class="stat-label">Hari Ini</div></div>
+    <div class="stat-card"><div class="stat-value" id="pinnedNotes">0</div><div class="stat-label">Disematkan</div></div>
+    <div class="stat-card"><div class="stat-value" id="streakDays">0</div><div class="stat-label">Streak</div></div>
+    <div class="stat-card"><div class="stat-value" id="categoryCount">0</div><div class="stat-label">Kategori</div></div>
+    <div class="stat-card"><div class="stat-value" id="wordCount">0</div><div class="stat-label">Kata</div></div>
+  </div>
+
+  <!-- Daily Quote -->
+  <div class="daily-quote">
+    <div class="quote-text" id="dailyQuote">"Kata-kata yang ditulis hari ini adalah sejarah yang akan dibaca esok."</div>
+    <div class="quote-author" id="quoteAuthor">— Epistello</div>
+  </div>
+
+  <!-- Input Section -->
+  <section class="input-section" id="inputSection">
+    <div class="section-title">
+      ✏️ Tulis Catatan Baru
+      <span class="accent-line"></span>
+    </div>
+    <textarea id="noteInput" placeholder="Tulis catatan Anda di sini..."></textarea>
+
+    <div class="input-options">
+      <div class="input-option-group">
+        <label>🎨 Warna Teks</label>
+        <div class="color-picker">
+          <div><div class="color-option selected" style="background:#8b5e3c;" onclick="selectColor('#8b5e3c')"><div class="checkmark">✓</div></div></div>
+          <div><div class="color-option" style="background:#d4a373;" onclick="selectColor('#d4a373')"><div class="checkmark">✓</div></div></div>
+          <div><div class="color-option" style="background:#2d6a4f;" onclick="selectColor('#2d6a4f')"><div class="checkmark">✓</div></div></div>
+          <div><div class="color-option" style="background:#b5835a;" onclick="selectColor('#b5835a')"><div class="checkmark">✓</div></div></div>
+          <div><div class="color-option" style="background:#c9a87c;" onclick="selectColor('#c9a87c')"><div class="checkmark">✓</div></div></div>
+          <div><div class="color-option" style="background:#40916c;" onclick="selectColor('#40916c')"><div class="checkmark">✓</div></div></div>
+          <div><div class="color-option" style="background:#a0704a;" onclick="selectColor('#a0704a')"><div class="checkmark">✓</div></div></div>
+          <div class="custom-color-wrapper">
+            <input type="color" class="custom-color-input" id="customColorInput" value="#8b5e3c" onchange="applyCustomColor(this.value)">
+            <span class="custom-color-label">Custom</span>
           </div>
         </div>
       </div>
-      <div class="modal-actions">
-        <button class="modal-btn modal-btn-cancel" onclick="closeEditModal()">Batal</button>
-        <button class="modal-btn modal-btn-confirm" onclick="saveEdit()">Simpan Perubahan</button>
+      <div class="input-option-group">
+        <label>📂 Kategori</label>
+        <select class="category-select" id="categorySelect">
+          <option value="umum">Umum</option>
+          <option value="work">Pekerjaan</option>
+          <option value="personal">Pribadi</option>
+          <option value="idea">Ide</option>
+          <option value="todo">To-Do</option>
+          <option value="important">Penting</option>
+        </select>
       </div>
+      <div class="input-option-group">
+        <label>⚡ Prioritas</label>
+        <select class="priority-select" id="prioritySelect">
+          <option value="normal">Normal</option>
+          <option value="high">Tinggi</option>
+          <option value="medium">Sedang</option>
+          <option value="low">Rendah</option>
+        </select>
+      </div>
+      <div class="input-option-group">
+        <label>⏰ Reminder</label>
+        <input type="datetime-local" id="reminderInput" style="background:rgba(15,10,6,0.5);border:1px solid var(--border-color);border-radius:8px;padding:10px 12px;color:var(--text-primary);font-family:'Inter',sans-serif;font-size:13px;outline:none;transition:0.2s;" onfocus="this.style.borderColor='#d4a373'">
+      </div>
+    </div>
+
+    <div class="features-bar">
+      <button class="feature-btn" onclick="addTimestamp()">🕒 Waktu</button>
+      <button class="feature-btn" onclick="addTodoList()">☑ Checklist</button>
+      <button class="feature-btn" onclick="addDivider()">➖ Garis</button>
+      <button class="feature-btn" onclick="addBulletList()">• List</button>
+    </div>
+
+    <button class="btn-primary" onclick="addNote()">➕ Tambah Catatan</button>
+  </section>
+
+  <!-- Search & Filter -->
+  <div class="search-section" id="notesTab">
+    <input class="search-input" id="searchInput" placeholder="🔍 Cari catatan..." oninput="searchNotes()">
+    <div class="date-filter-group">
+      <input type="date" class="date-filter-input" id="dateFilterFrom" onchange="filterByDate()" placeholder="Dari">
+      <span style="color:var(--text-muted);font-size:12px;">—</span>
+      <input type="date" class="date-filter-input" id="dateFilterTo" onchange="filterByDate()" placeholder="Sampai">
+      <button class="filter-btn" onclick="clearDateFilter()" style="font-size:10px;padding:6px 12px;">✕ Bersihkan</button>
+    </div>
+    <div class="filter-options">
+      <button class="filter-btn active" onclick="filterNotes('all', this)">Semua</button>
+      <button class="filter-btn" onclick="filterNotes('pinned', this)">📌</button>
+      <button class="filter-btn" onclick="filterNotes('today', this)">Hari ini</button>
+      <button class="filter-btn" onclick="filterNotes('high', this)">⚡</button>
     </div>
   </div>
 
-  <!-- Modal untuk Hapus -->
-  <div class="modal-overlay" id="deleteModal">
-    <div class="modal">
-      <div class="modal-header">
-        <h3 class="modal-title">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 6H5H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M8 6V4C8 3.46957 8.21071 2.96086 8.58579 2.58579C8.96086 2.21071 9.46957 2 10 2H14C14.5304 2 15.0391 2.21071 15.4142 2.58579C15.7893 2.96086 16 3.46957 16 4V6M19 6V20C19 20.5304 18.7893 21.0391 18.4142 21.4142C18.0391 21.7893 17.5304 22 17 22H7C6.46957 22 5.96086 21.7893 5.58579 21.4142C5.21071 21.0391 5 20.5304 5 20V6H19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Hapus Catatan
-        </h3>
-        <button class="modal-close" onclick="closeDeleteModal()">&times;</button>
+  <!-- Notes -->
+  <section>
+    <div class="notes-header">
+      <h2>📋 Catatan Saya</h2>
+      <div class="notes-count" id="notesCount">0 catatan</div>
+    </div>
+    <div class="notes-list" id="notesList"></div>
+  </section>
+
+  <!-- Archive Section -->
+  <section id="archiveSection">
+    <div class="notes-header">
+      <h2>📦 Arsip</h2>
+      <div class="notes-count" id="archiveCount">0 arsip</div>
+    </div>
+    <div class="notes-list" id="archiveList"></div>
+  </section>
+
+  <!-- Stats Section -->
+  <section id="statsSection">
+    <div class="stats-detail-grid">
+      <div class="stat-detail-card">
+        <div class="stat-detail-value" id="statTotalWords">0</div>
+        <div class="stat-detail-label">Total Kata</div>
       </div>
-      <div class="modal-body">
-        <p class="modal-text">Apakah Anda yakin ingin menghapus catatan ini? Tindakan ini tidak dapat dibatalkan.</p>
+      <div class="stat-detail-card">
+        <div class="stat-detail-value" id="statAvgWords">0</div>
+        <div class="stat-detail-label">Rata-rata Kata</div>
       </div>
-      <div class="modal-actions">
-        <button class="modal-btn modal-btn-cancel" onclick="closeDeleteModal()">Batal</button>
-        <button class="modal-btn modal-btn-danger" onclick="confirmDelete()">Ya, Hapus</button>
+      <div class="stat-detail-card">
+        <div class="stat-detail-value" id="statLongest">0</div>
+        <div class="stat-detail-label">Terpanjang</div>
+      </div>
+      <div class="stat-detail-card">
+        <div class="stat-detail-value" id="statMostCategory">-</div>
+        <div class="stat-detail-label">Kategori Terbanyak</div>
+      </div>
+      <div class="stat-detail-card">
+        <div class="stat-detail-value" id="statCompletion">0%</div>
+        <div class="stat-detail-label">Produktivitas</div>
       </div>
     </div>
+    <div class="activity-log">
+      <h4>📜 Aktivitas Terbaru</h4>
+      <div id="activityLog"></div>
+    </div>
+  </section>
+
+  <!-- Achievement Badge -->
+  <div class="achievement-badge" id="achievementBadge">
+    <div class="icon">🏆</div>
+    <div><strong id="achievementTitle">Prestasi!</strong><div class="desc" id="achievementDesc"></div></div>
   </div>
 
-  <script>
-    let currentEditingNote = null;
-    let currentDeletingNote = null;
-    let selectedColor = '#6366f1';
-    let currentEditColor = '#6366f1';
-    let currentFilter = 'all';
-    let userStats = {
-      totalNotes: 0,
-      todayNotes: 0,
-      pinnedNotes: 0,
-      streakDays: 0,
-      lastNoteDate: null
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="copyright">© 2025 <b>Epistello</b> · Catatan Premium</div>
+      <div class="support-section">
+        <div class="support-title">💬 Laporkan Bug & Saran</div>
+        <div class="contact-links">
+          <a href="https://wa.me/6285604047346?text=Halo%20Epistello" class="contact-link whatsapp-link" target="_blank">WhatsApp</a>
+          <a href="https://instagram.com/_rezxx1" class="contact-link instagram-link" target="_blank">@Rezxx1</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- Modals -->
+<div class="modal-overlay" id="editModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title">✎ Edit Catatan</h3>
+      <button class="modal-close" onclick="closeEditModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <textarea class="modal-textarea" id="editTextarea"></textarea>
+      <div class="modal-color-picker">
+        <div class="modal-color-option selected" style="background:#8b5e3c;" onclick="selectEditColor('#8b5e3c')"><div class="modal-checkmark">✓</div></div>
+        <div class="modal-color-option" style="background:#d4a373;" onclick="selectEditColor('#d4a373')"><div class="modal-checkmark">✓</div></div>
+        <div class="modal-color-option" style="background:#2d6a4f;" onclick="selectEditColor('#2d6a4f')"><div class="modal-checkmark">✓</div></div>
+        <div class="modal-color-option" style="background:#b5835a;" onclick="selectEditColor('#b5835a')"><div class="modal-checkmark">✓</div></div>
+        <div class="modal-color-option" style="background:#c9a87c;" onclick="selectEditColor('#c9a87c')"><div class="modal-checkmark">✓</div></div>
+        <input type="color" class="custom-color-input" id="editCustomColor" value="#8b5e3c" onchange="applyEditCustomColor(this.value)" style="width:28px;height:28px;padding:0;border:none;border-radius:8px;cursor:pointer;background:none;">
+      </div>
+      <div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">
+        <select class="category-select" id="editCategory" style="flex:1; min-width:100px;">
+          <option value="umum">Umum</option>
+          <option value="work">Pekerjaan</option>
+          <option value="personal">Pribadi</option>
+          <option value="idea">Ide</option>
+          <option value="todo">To-Do</option>
+          <option value="important">Penting</option>
+        </select>
+        <select class="priority-select" id="editPriority" style="flex:1; min-width:80px;">
+          <option value="normal">Normal</option>
+          <option value="high">Tinggi</option>
+          <option value="medium">Sedang</option>
+          <option value="low">Rendah</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-cancel" onclick="closeEditModal()">Batal</button>
+      <button class="modal-btn modal-btn-confirm" onclick="saveEdit()">Simpan</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="deleteModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title">🗑 Hapus Catatan</h3>
+      <button class="modal-close" onclick="closeDeleteModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="color:var(--text-secondary); line-height:1.7;">Yakin ingin menghapus catatan ini? Tindakan ini tidak bisa dibatalkan.</p>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-cancel" onclick="closeDeleteModal()">Batal</button>
+      <button class="modal-btn modal-btn-danger" onclick="confirmDelete()">Ya, hapus</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ===== STATE =====
+  let selectedColor = '#8b5e3c';
+  let currentEditColor = '#8b5e3c';
+  let currentFilter = 'all';
+  let currentEditingNote = null;
+  let currentDeletingNote = null;
+  let currentTab = 'notes';
+  let dateFilterFrom = '';
+  let dateFilterTo = '';
+
+  // ===== DATA =====
+  const motivations = [
+    "Tulis satu ide hari ini, ciptakan masa depan esok!",
+    "Setiap catatan adalah langkah menuju kesuksesan!",
+    "Ide terbaik lahir dari catatan sederhana.",
+    "Jangan biarkan ide brilian menguap begitu saja!",
+    "Menulis adalah cara terbaik mengorganisir pikiran.",
+    "Catatan kecil hari ini, karya besar esok hari!",
+    "Produktivitas dimulai dari satu catatan.",
+    "Tidak ada ide yang terlalu kecil untuk dicatat!"
+  ];
+
+  const quotes = [
+    { text: "Kata-kata yang ditulis hari ini adalah sejarah yang akan dibaca esok.", author: "Epistello" },
+    { text: "Sebuah catatan kecil bisa menjadi awal dari pencapaian besar.", author: "Pepatah" },
+    { text: "Orang yang mencatat adalah orang yang tidak pernah lupa.", author: "Anonim" },
+    { text: "Tulis sekarang, kapan pun bisa dibaca nanti.", author: "Penulis Bijak" },
+    { text: "Dari coretan sederhana lahir karya-karya luar biasa.", author: "Inspirator" },
+    { text: "Pena lebih tajam dari ingatan, tuliskan sebelum terlupa.", author: "Filsuf Modern" }
+  ];
+
+  const achievements = [
+    { id: 'first_note', title: 'Pertama Kali!', description: 'Membuat catatan pertama' },
+    { id: 'five_notes', title: 'Penulis Pemula', description: 'Membuat 5 catatan' },
+    { id: 'ten_notes', title: 'Pencatat Andal', description: 'Membuat 10 catatan' },
+    { id: 'twenty_notes', title: 'Penulis Produktif', description: 'Membuat 20 catatan' },
+    { id: 'three_day_streak', title: 'Konsisten!', description: '3 hari berturut-turut mencatat' },
+    { id: 'seven_day_streak', title: 'Disiplin Tinggi', description: '7 hari berturut-turut mencatat' },
+    { id: 'first_pin', title: 'Prioritas Utama', description: 'Menyematkan catatan pertama' },
+    { id: 'color_master', title: 'Seniman Warna', description: 'Menggunakan 5+ warna berbeda' },
+    { id: 'category_master', title: 'Organizer', description: 'Membuat catatan di 5 kategori berbeda' }
+  ];
+
+  let activityLog = [];
+
+  // ===== INIT =====
+  window.onload = function() {
+    const saved = JSON.parse(localStorage.getItem("notes")) || [];
+    const archived = JSON.parse(localStorage.getItem("archived")) || [];
+    activityLog = JSON.parse(localStorage.getItem("activityLog")) || [];
+    
+    saved.forEach(n => createNoteElement(n, 'notesList'));
+    archived.forEach(n => createNoteElement(n, 'archiveList', true));
+    
+    updateStats();
+    updateNotesCount();
+    updateArchiveCount();
+    changeMotivation();
+    showDailyQuote();
+    checkAchievements();
+    updateBadges();
+    updateStatsDetail();
+    renderActivityLog();
+    
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    document.getElementById('reminderInput').value = tomorrow.toISOString().slice(0, 16);
+  };
+
+  // ===== TAB SWITCHING =====
+  function switchTab(tab, btn) {
+    currentTab = tab;
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    
+    document.getElementById('inputSection').classList.toggle('active', tab === 'add');
+    document.getElementById('notesTab').style.display = tab === 'notes' ? 'flex' : 'none';
+    document.getElementById('notesList').parentElement.style.display = tab === 'notes' ? 'block' : 'none';
+    document.getElementById('archiveSection').classList.toggle('active', tab === 'archive');
+    document.getElementById('statsSection').classList.toggle('active', tab === 'stats');
+    
+    if (tab === 'stats') updateStatsDetail();
+    if (tab === 'archive') renderArchive();
+  }
+
+  // ===== CUSTOM COLOR =====
+  function applyCustomColor(color) {
+    selectedColor = color;
+    document.querySelectorAll('.color-option').forEach(el => el.classList.remove('selected'));
+    document.getElementById('noteInput').style.color = color;
+    document.getElementById('noteInput').style.borderColor = color + '60';
+    document.getElementById('customColorInput').value = color;
+    showToast('🎨 Warna custom dipilih');
+  }
+
+  function applyEditCustomColor(color) {
+    currentEditColor = color;
+    document.querySelectorAll('.modal-color-option').forEach(el => el.classList.remove('selected'));
+    document.getElementById('editTextarea').style.color = color;
+    document.getElementById('editTextarea').style.borderColor = color + '50';
+    document.getElementById('editCustomColor').value = color;
+  }
+
+  // ===== ADD NOTE =====
+  function addNote() {
+    const input = document.getElementById('noteInput');
+    if (input.value.trim() === '') { showToast('Catatan tidak boleh kosong!'); return; }
+    
+    const date = new Date().toLocaleString('id-ID', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+    const category = document.getElementById('categorySelect').value;
+    const priority = document.getElementById('prioritySelect').value;
+    const reminder = document.getElementById('reminderInput').value;
+    
+    const data = { 
+      text: input.value, 
+      date, 
+      color: selectedColor, 
+      pinned: false, 
+      archived: false,
+      category,
+      priority,
+      reminder,
+      timestamp: new Date().toISOString(),
+      id: Date.now().toString(36) + Math.random().toString(36).substr(2, 5)
     };
+    
+    createNoteElement(data, 'notesList');
+    saveNotes();
+    updateStats();
+    checkAchievements();
+    updateBadges();
+    
+    input.value = '';
+    updateNotesCount();
+    selectColor('#8b5e3c');
+    showToast('✅ Catatan berhasil ditambahkan!');
+    logActivity('Menambahkan catatan: ' + data.text.substring(0, 30) + (data.text.length > 30 ? '...' : ''));
+  }
 
-    // Array motivasi
-    const motivations = [
-      "Tulis satu ide hari ini, ciptakan masa depan esok!",
-      "Setiap catatan adalah langkah menuju kesuksesan!",
-      "Ide terbaik lahir dari catatan yang sederhana!",
-      "Jangan biarkan ide brilian menguap begitu saja!",
-      "Menulis adalah cara terbaik untuk mengorganisir pikiran!",
-      "Catatan kecil hari ini, karya besar esok hari!",
-      "Produktivitas dimulai dari satu catatan!",
-      "Tidak ada ide yang terlalu kecil untuk dicatat!"
-    ];
+  // ===== CREATE NOTE ELEMENT =====
+  function createNoteElement(data, listId, isArchive = false) {
+    const note = document.createElement('div');
+    note.className = 'note' + (data.pinned ? ' pinned' : '');
+    note.style.borderLeftColor = data.color;
+    note.dataset.id = data.id || Date.now().toString(36);
+    note.dataset.timestamp = data.timestamp || new Date().toISOString();
+    note.dataset.category = data.category || 'umum';
+    note.dataset.priority = data.priority || 'normal';
+    
+    const header = document.createElement('div');
+    header.className = 'note-header';
+    
+    const category = document.createElement('span');
+    category.className = 'note-category ' + data.category;
+    category.textContent = data.category || 'umum';
+    
+    const priority = document.createElement('span');
+    priority.className = 'note-priority ' + (data.priority || 'normal');
+    const priorityLabels = { high: '⚡ Tinggi', medium: '🔶 Sedang', low: '🔷 Rendah', normal: '▪ Normal' };
+    priority.textContent = priorityLabels[data.priority] || '▪ Normal';
+    
+    header.append(category, priority);
+    
+    const content = document.createElement('div');
+    content.className = 'note-content';
+    const text = document.createElement('p');
+    text.className = 'note-text';
+    text.innerText = data.text;
+    text.style.color = data.color;
+    
+    const date = document.createElement('div');
+    date.className = 'note-date';
+    let dateText = data.date;
+    if (data.reminder) {
+      const remDate = new Date(data.reminder);
+      dateText += ' ⏰ ' + remDate.toLocaleString('id-ID', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' });
+    }
+    date.textContent = dateText;
 
-    // Array kutipan harian
-    const quotes = [
-      { text: "Kata-kata yang ditulis hari ini adalah sejarah yang akan dibaca esok.", author: "Epistello" },
-      { text: "Sebuah catatan kecil bisa menjadi awal dari pencapaian besar.", author: "Pepatah" },
-      { text: "Orang yang mencatat adalah orang yang tidak pernah lupa.", author: "Anonim" },
-      { text: "Tulis sekarang, kapan pun bisa dibaca nanti.", author: "Penulis Bijak" },
-      { text: "Dari coretan sederhana lahir karya-karya luar biasa.", author: "Inspirator" },
-      { text: "Pena lebih tajam dari ingatan, tuliskan sebelum terlupa.", author: "Filsuf Modern" },
-      { text: "Setiap halaman kosong adalah peluang baru.", author: "Penulis" }
-    ];
+    const actions = document.createElement('div');
+    actions.className = 'actions';
 
-    // Prestasi yang bisa didapatkan
-    const achievements = [
-      { id: 'first_note', title: 'Pertama Kali!', description: 'Membuat catatan pertama' },
-      { id: 'five_notes', title: 'Penulis Pemula', description: 'Membuat 5 catatan' },
-      { id: 'ten_notes', title: 'Pencatat Andal', description: 'Membuat 10 catatan' },
-      { id: 'three_day_streak', title: 'Konsisten!', description: '3 hari berturut-turut mencatat' },
-      { id: 'seven_day_streak', title: 'Disiplin Tinggi', description: '7 hari berturut-turut mencatat' },
-      { id: 'first_pin', title: 'Prioritas Utama', description: 'Menyematkan catatan pertama' },
-      { id: 'color_master', title: 'Seniman Warna', description: 'Menggunakan semua warna yang tersedia' }
-    ];
+    if (!isArchive) {
+      const pinBtn = document.createElement('button');
+      pinBtn.className = 'btn-secondary';
+      pinBtn.innerHTML = data.pinned ? '📌 Lepas' : '📌 Sematkan';
+      pinBtn.onclick = () => { togglePin(note, data); };
 
-    // Ambil catatan dari localStorage saat halaman dibuka
-    window.onload = function() {
-      let savedNotes = JSON.parse(localStorage.getItem("notes")) || [];
-      savedNotes.forEach(note => createNoteElement(note));
-      updateStats();
-      updateNotesCount();
+      const archiveBtn = document.createElement('button');
+      archiveBtn.className = 'btn-secondary';
+      archiveBtn.innerHTML = '📦 Arsip';
+      archiveBtn.onclick = () => { archiveNote(note, data); };
+
+      const editBtn = document.createElement('button');
+      editBtn.className = 'btn-secondary';
+      editBtn.innerHTML = '✎ Edit';
+      editBtn.onclick = () => { openEditModal(note, text, data); };
+
+      const delBtn = document.createElement('button');
+      delBtn.className = 'btn-danger';
+      delBtn.innerHTML = '🗑 Hapus';
+      delBtn.onclick = () => { openDeleteModal(note); };
+
+      actions.append(pinBtn, archiveBtn, editBtn, delBtn);
+    } else {
+      const restoreBtn = document.createElement('button');
+      restoreBtn.className = 'btn-secondary';
+      restoreBtn.innerHTML = '↩️ Pulihkan';
+      restoreBtn.onclick = () => { restoreNote(note, data); };
       
-      // Tampilkan kutipan harian
-      showDailyQuote();
+      const delBtn = document.createElement('button');
+      delBtn.className = 'btn-danger';
+      delBtn.innerHTML = '🗑 Hapus Permanen';
+      delBtn.onclick = () => { deletePermanent(note, data); };
       
-      // Tampilkan motivasi acak
-      changeMotivation();
-      
-      // Periksa prestasi
-      checkAchievements();
-    };
-
-    function addNote() {
-      let input = document.getElementById("noteInput").value;
-      if (input.trim() === "") {
-        alert("Catatan tidak boleh kosong!");
-        return;
-      }
-
-      const date = new Date().toLocaleString('id-ID', {
-        day: 'numeric',
-        month: 'short',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      });
-
-      const noteData = {
-        text: input,
-        date: date,
-        color: selectedColor,
-        pinned: false,
-        timestamp: new Date().toISOString()
-      };
-
-      createNoteElement(noteData);
-      saveNotes();
-      updateStats();
-      checkAchievements();
-
-      document.getElementById("noteInput").value = "";
-      updateNotesCount();
-      
-      // Reset color to default
-      selectColor('#6366f1');
+      actions.append(restoreBtn, delBtn);
     }
 
-    function createNoteElement(noteData) {
-      let noteDiv = document.createElement("div");
-      noteDiv.classList.add("note");
-      if (noteData.pinned) {
-        noteDiv.classList.add("pinned");
-      }
-      
-      // Set border color berdasarkan warna yang dipilih
-      noteDiv.style.borderLeftColor = noteData.color;
+    content.append(text);
+    note.append(header, content, date, actions);
 
-      let contentDiv = document.createElement("div");
-      contentDiv.classList.add("note-content");
+    const list = document.getElementById(listId);
+    if (data.pinned && !isArchive) list.prepend(note);
+    else list.append(note);
+  }
 
-      let noteText = document.createElement("p");
-      noteText.classList.add("note-text");
-      noteText.innerText = noteData.text;
-      // Set warna teks sesuai pilihan
-      noteText.style.color = noteData.color;
-      
-      // Tambahkan efek glow subtle untuk teks berwarna
-      if (noteData.color !== '#6366f1') {
-        noteText.style.textShadow = `0 0 1px ${noteData.color}20`;
-      }
+  // ===== ACTIONS =====
+  function togglePin(note, data) {
+    data.pinned = !data.pinned;
+    note.classList.toggle('pinned');
+    const btn = note.querySelector('.btn-secondary');
+    btn.innerHTML = data.pinned ? '📌 Lepas' : '📌 Sematkan';
+    saveNotes();
+    updateStats();
+    filterNotes(currentFilter);
+    if (data.pinned) showAchievement('first_pin');
+    updateBadges();
+  }
 
-      let noteDate = document.createElement("div");
-      noteDate.classList.add("note-date");
-      noteDate.innerText = noteData.date;
-
-      let actionsDiv = document.createElement("div");
-      actionsDiv.classList.add("actions");
-
-      // Tombol Pin
-      let pinBtn = document.createElement("button");
-      pinBtn.classList.add("btn-secondary");
-      pinBtn.innerHTML = `
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 17V22M9 9V4L15 4V9L20 9V13H4V9L9 9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        ${noteData.pinned ? 'Lepas' : 'Sematkan'}
-      `;
-      pinBtn.onclick = function () {
-        togglePin(noteDiv, noteData);
-      };
-
-      // Tombol Edit
-      let editBtn = document.createElement("button");
-      editBtn.classList.add("btn-secondary");
-      editBtn.innerHTML = `
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M11 4H4C3.46957 4 2.96086 4.21071 2.58579 4.58579C2.21071 4.96086 2 5.46957 2 6V20C2 20.5304 2.21071 21.0391 2.58579 21.4142C2.96086 21.7893 3.46957 22 4 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M18.5 2.5C18.8978 2.10217 19.4374 1.87868 20 1.87868C20.5626 1.87868 21.1022 2.10217 21.5 2.5C21.8978 2.89782 22.1213 3.43739 22.1213 4C22.1213 4.56261 21.8978 5.10217 21.5 5.5L12 15L8 16L9 12L18.5 2.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Edit
-      `;
-      editBtn.onclick = function () {
-        openEditModal(noteDiv, noteText, noteData);
-      };
-
-      // Tombol Hapus
-      let deleteBtn = document.createElement("button");
-      deleteBtn.classList.add("btn-danger");
-      deleteBtn.innerHTML = `
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3 6H5H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M8 6V4C8 3.46957 8.21071 2.96086 8.58579 2.58579C8.96086 2.21071 9.46957 2 10 2H14C14.5304 2 15.0391 2.21071 15.4142 2.58579C15.7893 2.96086 16 3.46957 16 4V6M19 6V20C19 20.5304 18.7893 21.0391 18.4142 21.4142C18.0391 21.7893 17.5304 22 17 22H7C6.46957 22 5.96086 21.7893 5.58579 21.4142C5.21071 21.0391 5 20.5304 5 20V6H19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Hapus
-      `;
-      deleteBtn.onclick = function () {
-        openDeleteModal(noteDiv);
-      };
-
-      actionsDiv.appendChild(pinBtn);
-      actionsDiv.appendChild(editBtn);
-      actionsDiv.appendChild(deleteBtn);
-
-      contentDiv.appendChild(noteText);
-      noteDiv.appendChild(contentDiv);
-      noteDiv.appendChild(noteDate);
-      noteDiv.appendChild(actionsDiv);
-
-      // Tambahkan ke awal jika disematkan, jika tidak tambahkan ke akhir
-      if (noteData.pinned) {
-        document.getElementById("notesList").insertBefore(noteDiv, document.getElementById("notesList").firstChild);
-      } else {
-        document.getElementById("notesList").appendChild(noteDiv);
-      }
-    }
-
-    function togglePin(noteElement, noteData) {
-      noteData.pinned = !noteData.pinned;
-      if (noteData.pinned) {
-        noteElement.classList.add('pinned');
-        noteElement.querySelector('.btn-secondary').innerHTML = `
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 17V22M9 9V4L15 4V9L20 9V13H4V9L9 9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Lepas
-        `;
-      } else {
-        noteElement.classList.remove('pinned');
-        noteElement.querySelector('.btn-secondary').innerHTML = `
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 17V22M9 9V4L15 4V9L20 9V13H4V9L9 9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Sematkan
-        `;
-      }
-      
+  function archiveNote(note, data) {
+    if (confirm('Arsipkan catatan ini?')) {
+      data.archived = true;
+      note.remove();
       saveNotes();
       updateStats();
+      updateNotesCount();
+      updateArchiveCount();
+      updateBadges();
+      showToast('📦 Catatan diarsipkan');
+      logActivity('Mengarsipkan catatan: ' + data.text.substring(0, 30) + '...');
+    }
+  }
+
+  function restoreNote(note, data) {
+    data.archived = false;
+    note.remove();
+    saveNotes();
+    updateStats();
+    updateNotesCount();
+    updateArchiveCount();
+    updateBadges();
+    showToast('↩️ Catatan dipulihkan');
+    logActivity('Memulihkan catatan dari arsip');
+  }
+
+  function deletePermanent(note, data) {
+    if (confirm('Hapus permanen catatan ini?')) {
+      note.remove();
+      const notes = JSON.parse(localStorage.getItem("notes")) || [];
+      const archived = JSON.parse(localStorage.getItem("archived")) || [];
+      const filtered = notes.filter(n => n.id !== data.id);
+      const filteredArchived = archived.filter(n => n.id !== data.id);
+      localStorage.setItem("notes", JSON.stringify(filtered));
+      localStorage.setItem("archived", JSON.stringify(filteredArchived));
+      updateStats();
+      updateNotesCount();
+      updateArchiveCount();
+      updateBadges();
+      showToast('🗑 Catatan dihapus permanen');
+    }
+  }
+
+  // ===== SELECT COLOR =====
+  function selectColor(color) {
+    selectedColor = color;
+    document.querySelectorAll('.color-option').forEach(el => el.classList.remove('selected'));
+    event.target.closest('.color-option').classList.add('selected');
+    document.getElementById('noteInput').style.color = color;
+    document.getElementById('noteInput').style.borderColor = color + '60';
+    document.getElementById('customColorInput').value = color;
+  }
+
+  function selectEditColor(color) {
+    currentEditColor = color;
+    document.querySelectorAll('.modal-color-option').forEach(el => el.classList.remove('selected'));
+    event.target.closest('.modal-color-option').classList.add('selected');
+    document.getElementById('editTextarea').style.color = color;
+    document.getElementById('editTextarea').style.borderColor = color + '50';
+    document.getElementById('editCustomColor').value = color;
+  }
+
+  // ===== SEARCH & FILTER =====
+  function searchNotes() {
+    const query = document.getElementById('searchInput').value.toLowerCase().trim();
+    const notes = document.querySelectorAll('#notesList .note');
+    notes.forEach(n => {
+      const text = n.querySelector('.note-text')?.textContent.toLowerCase() || '';
+      const show = !query || text.includes(query);
+      n.style.display = (show && n.style.display !== 'none') ? 'block' : 'none';
+    });
+    updateNotesCount();
+  }
+
+  function filterNotes(filter, btn) {
+    currentFilter = filter;
+    document.querySelectorAll('.filter-options .filter-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    
+    const notes = document.querySelectorAll('#notesList .note');
+    const today = new Date().toDateString();
+    notes.forEach(n => {
+      let show = true;
+      if (filter === 'pinned') show = n.classList.contains('pinned');
+      else if (filter === 'today') {
+        const ts = n.dataset.timestamp;
+        if (ts) show = new Date(ts).toDateString() === today;
+        else show = false;
+      } else if (filter === 'high') {
+        show = n.dataset.priority === 'high';
+      }
+      n.style.display = show ? 'block' : 'none';
+    });
+    updateNotesCount();
+    applyDateFilter();
+  }
+
+  function filterByDate() {
+    const from = document.getElementById('dateFilterFrom').value;
+    const to = document.getElementById('dateFilterTo').value;
+    dateFilterFrom = from;
+    dateFilterTo = to;
+    applyDateFilter();
+  }
+
+  function applyDateFilter() {
+    const notes = document.querySelectorAll('#notesList .note');
+    const from = dateFilterFrom ? new Date(dateFilterFrom) : null;
+    const to = dateFilterTo ? new Date(dateFilterTo) : null;
+    if (to) to.setHours(23, 59, 59, 999);
+    
+    notes.forEach(n => {
+      const ts = n.dataset.timestamp;
+      if (!ts) return;
+      const date = new Date(ts);
+      let show = true;
+      if (from && date < from) show = false;
+      if (to && date > to) show = false;
+      if (show && n.style.display === 'none') show = false;
+      n.style.display = show ? 'block' : 'none';
+    });
+    updateNotesCount();
+  }
+
+  function clearDateFilter() {
+    document.getElementById('dateFilterFrom').value = '';
+    document.getElementById('dateFilterTo').value = '';
+    dateFilterFrom = '';
+    dateFilterTo = '';
+    const notes = document.querySelectorAll('#notesList .note');
+    notes.forEach(n => {
+      if (n.style.display !== 'none') n.style.display = 'block';
+    });
+    updateNotesCount();
+  }
+
+  // ===== STATS =====
+  function updateStats() {
+    const notes = JSON.parse(localStorage.getItem("notes")) || [];
+    const archived = JSON.parse(localStorage.getItem("archived")) || [];
+    const today = new Date().toDateString();
+    const total = notes.length;
+    const todayCount = notes.filter(n => new Date(n.timestamp).toDateString() === today).length;
+    const pinned = notes.filter(n => n.pinned).length;
+    const categories = new Set(notes.map(n => n.category || 'umum'));
+    const totalWords = notes.reduce((sum, n) => sum + (n.text || '').split(/\s+/).filter(w => w).length, 0);
+    
+    let streak = 0;
+    if (notes.length) {
+      const dates = notes.map(n => new Date(n.timestamp).toDateString()).sort();
+      let cur = new Date(dates[dates.length-1]);
+      streak = 1;
+      for (let i = dates.length-2; i>=0; i--) {
+        const prev = new Date(dates[i]);
+        const diff = (cur - prev) / (86400000);
+        if (diff === 1) { streak++; cur = prev; }
+        else if (diff > 1) break;
+      }
+    }
+    
+    document.getElementById('totalNotes').textContent = total;
+    document.getElementById('todayNotes').textContent = todayCount;
+    document.getElementById('pinnedNotes').textContent = pinned;
+    document.getElementById('streakDays').textContent = streak;
+    document.getElementById('categoryCount').textContent = categories.size;
+    document.getElementById('wordCount').textContent = totalWords;
+  }
+
+  function updateStatsDetail() {
+    const notes = JSON.parse(localStorage.getItem("notes")) || [];
+    const totalWords = notes.reduce((sum, n) => sum + (n.text || '').split(/\s+/).filter(w => w).length, 0);
+    const avgWords = notes.length ? Math.round(totalWords / notes.length) : 0;
+    const longest = notes.length ? Math.max(...notes.map(n => (n.text || '').split(/\s+/).filter(w => w).length)) : 0;
+    
+    const catCount = {};
+    notes.forEach(n => {
+      const cat = n.category || 'umum';
+      catCount[cat] = (catCount[cat] || 0) + 1;
+    });
+    let mostCat = '-';
+    let maxCat = 0;
+    for (const [cat, count] of Object.entries(catCount)) {
+      if (count > maxCat) { maxCat = count; mostCat = cat; }
+    }
+    
+    const totalDays = Math.ceil((new Date() - new Date(new Date().getFullYear(), 0, 1)) / (86400000));
+    const daysActive = notes.length ? new Set(notes.map(n => new Date(n.timestamp).toDateString())).size : 0;
+    const completion = totalDays ? Math.round((daysActive / Math.min(totalDays, 30)) * 100) : 0;
+    
+    document.getElementById('statTotalWords').textContent = totalWords;
+    document.getElementById('statAvgWords').textContent = avgWords;
+    document.getElementById('statLongest').textContent = longest;
+    document.getElementById('statMostCategory').textContent = mostCat.charAt(0).toUpperCase() + mostCat.slice(1);
+    document.getElementById('statCompletion').textContent = Math.min(completion, 100) + '%';
+  }
+
+  function updateNotesCount() {
+    const visible = document.querySelectorAll('#notesList .note[style*="display: block"], #notesList .note:not([style*="display"])');
+    const count = visible.length;
+    document.getElementById('notesCount').textContent = count + ' catatan';
+    
+    const list = document.getElementById('notesList');
+    if (count === 0 && !list.querySelector('.empty-state')) {
+      list.innerHTML = `
+        <div class="empty-state">
+          <div class="icon">📝</div>
+          <h3>Belum ada catatan</h3>
+          <p>Mulai dengan menambahkan catatan pertama Anda</p>
+        </div>
+      `;
+    } else if (count > 0 && list.querySelector('.empty-state')) {
+      list.innerHTML = '';
+      const saved = JSON.parse(localStorage.getItem("notes")) || [];
+      saved.forEach(n => createNoteElement(n, 'notesList'));
       filterNotes(currentFilter);
-      
-      if (noteData.pinned) {
-        showAchievement('first_pin');
-      }
+      applyDateFilter();
     }
+  }
 
-    // Fitur Tambahan
-    function addTimestamp() {
-      const now = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-      document.getElementById('noteInput').value += `[${now}] `;
+  function updateArchiveCount() {
+    const archived = JSON.parse(localStorage.getItem("archived")) || [];
+    document.getElementById('archiveCount').textContent = archived.length + ' arsip';
+    document.getElementById('archiveBadge').textContent = archived.length;
+  }
+
+  function updateBadges() {
+    const notes = JSON.parse(localStorage.getItem("notes")) || [];
+    document.getElementById('totalBadge').textContent = notes.length;
+  }
+
+  function renderArchive() {
+    const list = document.getElementById('archiveList');
+    list.innerHTML = '';
+    const archived = JSON.parse(localStorage.getItem("archived")) || [];
+    if (archived.length === 0) {
+      list.innerHTML = `
+        <div class="empty-state">
+          <div class="icon">📦</div>
+          <h3>Arsip kosong</h3>
+          <p>Catatan yang diarsipkan akan muncul di sini</p>
+        </div>
+      `;
+    } else {
+      archived.forEach(n => createNoteElement(n, 'archiveList', true));
     }
+  }
 
-    function addTodoList() {
-      const input = document.getElementById('noteInput');
-      if (input.value.trim() === '') {
-        input.value = '✅ \n✅ \n✅ ';
-      } else {
-        input.value += '\n✅ ';
-      }
+  // ===== SAVE =====
+  function saveNotes() {
+    const notes = [];
+    const archived = [];
+    
+    document.querySelectorAll('#notesList .note').forEach(el => {
+      const text = el.querySelector('.note-text').innerText;
+      const date = el.querySelector('.note-date').textContent;
+      const pinned = el.classList.contains('pinned');
+      const color = el.querySelector('.note-text').style.color || '#8b5e3c';
+      const category = el.dataset.category || 'umum';
+      const priority = el.dataset.priority || 'normal';
+      const id = el.dataset.id || Date.now().toString(36);
+      const timestamp = el.dataset.timestamp || new Date().toISOString();
+      notes.push({ text, date, pinned, color, category, priority, reminder: '', timestamp, id, archived: false });
+    });
+    
+    document.querySelectorAll('#archiveList .note').forEach(el => {
+      const text = el.querySelector('.note-text').innerText;
+      const date = el.querySelector('.note-date').textContent;
+      const color = el.querySelector('.note-text').style.color || '#8b5e3c';
+      const category = el.dataset.category || 'umum';
+      const priority = el.dataset.priority || 'normal';
+      const id = el.dataset.id || Date.now().toString(36);
+      const timestamp = el.dataset.timestamp || new Date().toISOString();
+      archived.push({ text, date, pinned: false, color, category, priority, reminder: '', timestamp, id, archived: true });
+    });
+    
+    localStorage.setItem("notes", JSON.stringify(notes));
+    localStorage.setItem("archived", JSON.stringify(archived));
+  }
+
+  // ===== ACTIVITY LOG =====
+  function logActivity(message) {
+    const time = new Date().toLocaleString('id-ID', { hour:'2-digit', minute:'2-digit' });
+    activityLog.unshift({ time, message, timestamp: Date.now() });
+    if (activityLog.length > 50) activityLog.pop();
+    localStorage.setItem('activityLog', JSON.stringify(activityLog));
+    renderActivityLog();
+  }
+
+  function renderActivityLog() {
+    const container = document.getElementById('activityLog');
+    if (!container) return;
+    if (activityLog.length === 0) {
+      container.innerHTML = '<div style="text-align:center; color:var(--text-muted); padding:20px;">Belum ada aktivitas</div>';
+      return;
     }
+    container.innerHTML = activityLog.slice(0, 20).map(log => 
+      `<div class="activity-item">
+        <span class="time">${log.time}</span>
+        <span class="msg">${log.message}</span>
+      </div>`
+    ).join('');
+  }
 
-    function selectColor(color) {
-      selectedColor = color;
-      document.querySelectorAll('.color-option').forEach(opt => {
-        opt.classList.remove('selected');
-      });
-      event.target.classList.add('selected');
-      
-      // Preview warna di textarea
-      const textarea = document.getElementById('noteInput');
-      textarea.style.color = color;
-      textarea.style.borderColor = color + '50';
+  // ===== ACHIEVEMENTS =====
+  function checkAchievements() {
+    const notes = JSON.parse(localStorage.getItem("notes")) || [];
+    const achieved = JSON.parse(localStorage.getItem("achievements")) || [];
+    const total = notes.length;
+    
+    if (total === 1 && !achieved.includes('first_note')) { showAchievement('first_note'); achieved.push('first_note'); }
+    if (total === 5 && !achieved.includes('five_notes')) { showAchievement('five_notes'); achieved.push('five_notes'); }
+    if (total === 10 && !achieved.includes('ten_notes')) { showAchievement('ten_notes'); achieved.push('ten_notes'); }
+    if (total === 20 && !achieved.includes('twenty_notes')) { showAchievement('twenty_notes'); achieved.push('twenty_notes'); }
+    
+    const streak = parseInt(document.getElementById('streakDays').textContent);
+    if (streak === 3 && !achieved.includes('three_day_streak')) { showAchievement('three_day_streak'); achieved.push('three_day_streak'); }
+    if (streak === 7 && !achieved.includes('seven_day_streak')) { showAchievement('seven_day_streak'); achieved.push('seven_day_streak'); }
+    
+    const colors = [...new Set(notes.map(n => n.color))];
+    if (colors.length >= 5 && !achieved.includes('color_master')) { showAchievement('color_master'); achieved.push('color_master'); }
+    
+    const categories = new Set(notes.map(n => n.category || 'umum'));
+    if (categories.size >= 5 && !achieved.includes('category_master')) { showAchievement('category_master'); achieved.push('category_master'); }
+    
+    localStorage.setItem("achievements", JSON.stringify(achieved));
+  }
+
+  function showAchievement(id) {
+    const a = achievements.find(x => x.id === id);
+    if (!a) return;
+    const badge = document.getElementById('achievementBadge');
+    document.getElementById('achievementTitle').textContent = a.title;
+    document.getElementById('achievementDesc').textContent = a.description;
+    badge.style.display = 'flex';
+    setTimeout(() => badge.style.display = 'none', 5000);
+  }
+
+  // ===== TOAST =====
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.style.display = 'block';
+    clearTimeout(toast._timeout);
+    toast._timeout = setTimeout(() => toast.style.display = 'none', 3000);
+  }
+
+  // ===== MODALS =====
+  function openEditModal(note, textEl, data) {
+    currentEditingNote = { element: note, textElement: textEl, data };
+    document.getElementById('editTextarea').value = textEl.innerText;
+    currentEditColor = data.color;
+    document.getElementById('editTextarea').style.color = data.color;
+    document.getElementById('editTextarea').style.borderColor = data.color + '50';
+    document.getElementById('editCategory').value = data.category || 'umum';
+    document.getElementById('editPriority').value = data.priority || 'normal';
+    document.getElementById('editCustomColor').value = data.color;
+    
+    document.querySelectorAll('.modal-color-option').forEach(el => {
+      el.classList.remove('selected');
+      if (el.style.backgroundColor === data.color) el.classList.add('selected');
+    });
+    document.getElementById('editModal').classList.add('active');
+    setTimeout(() => document.getElementById('editTextarea').focus(), 200);
+  }
+
+  function closeEditModal() {
+    document.getElementById('editModal').classList.remove('active');
+    currentEditingNote = null;
+  }
+
+  function saveEdit() {
+    if (!currentEditingNote) return;
+    const newText = document.getElementById('editTextarea').value.trim();
+    if (!newText) { showToast('Catatan tidak boleh kosong!'); return; }
+    
+    currentEditingNote.textElement.innerText = newText;
+    currentEditingNote.textElement.style.color = currentEditColor;
+    currentEditingNote.data.color = currentEditColor;
+    currentEditingNote.data.category = document.getElementById('editCategory').value;
+    currentEditingNote.data.priority = document.getElementById('editPriority').value;
+    currentEditingNote.element.style.borderLeftColor = currentEditColor;
+    currentEditingNote.element.dataset.category = currentEditingNote.data.category;
+    currentEditingNote.element.dataset.priority = currentEditingNote.data.priority;
+    
+    const catEl = currentEditingNote.element.querySelector('.note-category');
+    if (catEl) {
+      catEl.textContent = currentEditingNote.data.category;
+      catEl.className = 'note-category ' + currentEditingNote.data.category;
     }
-
-    function selectEditColor(color) {
-      currentEditColor = color;
-      document.querySelectorAll('.modal-color-option').forEach(opt => {
-        opt.classList.remove('selected');
-      });
-      event.target.classList.add('selected');
-      
-      // Preview warna di modal textarea
-      const editTextarea = document.getElementById('editTextarea');
-      editTextarea.style.color = color;
-      editTextarea.style.borderColor = color + '50';
+    const priEl = currentEditingNote.element.querySelector('.note-priority');
+    if (priEl) {
+      const labels = { high: '⚡ Tinggi', medium: '🔶 Sedang', low: '🔷 Rendah', normal: '▪ Normal' };
+      priEl.textContent = labels[currentEditingNote.data.priority] || '▪ Normal';
+      priEl.className = 'note-priority ' + currentEditingNote.data.priority;
     }
+    
+    saveNotes();
+    closeEditModal();
+    checkAchievements();
+    showToast('✅ Catatan diperbarui');
+    logActivity('Mengedit catatan: ' + newText.substring(0, 30) + '...');
+  }
 
-    function changeMotivation() {
-      const randomIndex = Math.floor(Math.random() * motivations.length);
-      document.getElementById('motivationText').textContent = motivations[randomIndex];
-    }
+  function openDeleteModal(note) {
+    currentDeletingNote = note;
+    document.getElementById('deleteModal').classList.add('active');
+  }
 
-    function showDailyQuote() {
-      const randomIndex = Math.floor(Math.random() * quotes.length);
-      document.getElementById('dailyQuote').textContent = `"${quotes[randomIndex].text}"`;
-      document.getElementById('quoteAuthor').textContent = `- ${quotes[randomIndex].author}`;
-    }
+  function closeDeleteModal() {
+    document.getElementById('deleteModal').classList.remove('active');
+    currentDeletingNote = null;
+  }
 
-    function filterNotes(filter) {
-      currentFilter = filter;
-      
-      // Update active filter button
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      event.target.classList.add('active');
-      
-      const notes = document.querySelectorAll('.note');
-      const today = new Date().toDateString();
-      
-      notes.forEach(note => {
-        let show = true;
-        
-        if (filter === 'pinned') {
-          show = note.classList.contains('pinned');
-        } else if (filter === 'today') {
-          const noteDate = new Date(note.querySelector('.note-date').textContent).toDateString();
-          show = noteDate === today;
-        }
-        
-        note.style.display = show ? 'block' : 'none';
-      });
-      
+  function confirmDelete() {
+    if (!currentDeletingNote) return;
+    const data = getNoteData(currentDeletingNote);
+    currentDeletingNote.classList.add('deleting');
+    setTimeout(() => {
+      currentDeletingNote.remove();
+      saveNotes();
+      updateStats();
       updateNotesCount();
-    }
+      updateBadges();
+      closeDeleteModal();
+      showToast('🗑 Catatan dihapus');
+      logActivity('Menghapus catatan: ' + (data?.text || '').substring(0, 30) + '...');
+    }, 350);
+  }
 
-    function updateStats() {
-      const notes = JSON.parse(localStorage.getItem("notes")) || [];
-      const today = new Date().toDateString();
-      
-      userStats.totalNotes = notes.length;
-      userStats.todayNotes = notes.filter(note => {
-        const noteDate = new Date(note.timestamp).toDateString();
-        return noteDate === today;
-      }).length;
-      userStats.pinnedNotes = notes.filter(note => note.pinned).length;
-      
-      // Calculate streak
-      if (notes.length > 0) {
-        const sortedDates = notes.map(n => new Date(n.timestamp).toDateString()).sort();
-        let streak = 1;
-        let currentDate = new Date(sortedDates[sortedDates.length - 1]);
-        
-        for (let i = sortedDates.length - 2; i >= 0; i--) {
-          const prevDate = new Date(sortedDates[i]);
-          const diffDays = Math.floor((currentDate - prevDate) / (1000 * 60 * 60 * 24));
-          
-          if (diffDays === 1) {
-            streak++;
-            currentDate = prevDate;
-          } else if (diffDays > 1) {
-            break;
-          }
-        }
-        
-        userStats.streakDays = streak;
-      }
-      
-      // Update UI
-      document.getElementById('totalNotes').textContent = userStats.totalNotes;
-      document.getElementById('todayNotes').textContent = userStats.todayNotes;
-      document.getElementById('pinnedNotes').textContent = userStats.pinnedNotes;
-      document.getElementById('streakDays').textContent = userStats.streakDays;
-    }
+  function getNoteData(el) {
+    const id = el.dataset.id;
+    const notes = JSON.parse(localStorage.getItem("notes")) || [];
+    return notes.find(n => n.id === id) || { text: '' };
+  }
 
-    function checkAchievements() {
-      const notes = JSON.parse(localStorage.getItem("notes")) || [];
-      const achieved = JSON.parse(localStorage.getItem("achievements")) || [];
-      
-      // Check first note achievement
-      if (notes.length === 1 && !achieved.includes('first_note')) {
-        showAchievement('first_note');
-        achieved.push('first_note');
-      }
-      
-      // Check 5 notes achievement
-      if (notes.length === 5 && !achieved.includes('five_notes')) {
-        showAchievement('five_notes');
-        achieved.push('five_notes');
-      }
-      
-      // Check 10 notes achievement
-      if (notes.length === 10 && !achieved.includes('ten_notes')) {
-        showAchievement('ten_notes');
-        achieved.push('ten_notes');
-      }
-      
-      // Check streak achievements
-      if (userStats.streakDays === 3 && !achieved.includes('three_day_streak')) {
-        showAchievement('three_day_streak');
-        achieved.push('three_day_streak');
-      }
-      
-      if (userStats.streakDays === 7 && !achieved.includes('seven_day_streak')) {
-        showAchievement('seven_day_streak');
-        achieved.push('seven_day_streak');
-      }
-      
-      // Check color achievement
-      const uniqueColors = [...new Set(notes.map(note => note.color))];
-      if (uniqueColors.length >= 5 && !achieved.includes('color_master')) {
-        showAchievement('color_master');
-        achieved.push('color_master');
-      }
-      
-      localStorage.setItem("achievements", JSON.stringify(achieved));
-    }
+  // ===== HELPERS =====
+  function addTimestamp() {
+    const now = new Date().toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' });
+    document.getElementById('noteInput').value += `[${now}] `;
+  }
 
-    function showAchievement(achievementId) {
-      const achievement = achievements.find(a => a.id === achievementId);
-      if (!achievement) return;
-      
-      const badge = document.getElementById('achievementBadge');
-      document.getElementById('achievementTitle').textContent = achievement.title;
-      document.getElementById('achievementDesc').textContent = achievement.description;
-      
-      badge.style.display = 'flex';
-      
-      // Auto hide after 5 seconds
-      setTimeout(() => {
-        badge.style.display = 'none';
-      }, 5000);
-    }
+  function addTodoList() {
+    const input = document.getElementById('noteInput');
+    input.value += (input.value.trim() ? '\n' : '') + '☑ ';
+  }
 
-    // Modal Functions
-    function openEditModal(noteElement, textElement, noteData) {
-      currentEditingNote = { 
-        element: noteElement, 
-        textElement: textElement, 
-        data: noteData,
-        originalColor: noteData.color
-      };
-      document.getElementById('editTextarea').value = textElement.innerText;
-      currentEditColor = noteData.color;
-      
-      // Set warna textarea modal sesuai warna catatan
-      document.getElementById('editTextarea').style.color = noteData.color;
-      document.getElementById('editTextarea').style.borderColor = noteData.color + '50';
-      
-      // Set pilihan warna di modal
-      document.querySelectorAll('.modal-color-option').forEach(opt => {
-        opt.classList.remove('selected');
-        if (opt.style.backgroundColor === noteData.color) {
-          opt.classList.add('selected');
-        }
-      });
-      
-      document.getElementById('editModal').classList.add('active');
-      
-      setTimeout(() => {
-        document.getElementById('editTextarea').focus();
-      }, 300);
-    }
+  function addDivider() {
+    const input = document.getElementById('noteInput');
+    input.value += (input.value.trim() ? '\n' : '') + '─'.repeat(40);
+  }
 
-    function closeEditModal() {
-      document.getElementById('editModal').classList.remove('active');
-      // Reset warna textarea
-      document.getElementById('editTextarea').style.color = '';
-      document.getElementById('editTextarea').style.borderColor = '';
-      currentEditingNote = null;
-    }
+  function addBulletList() {
+    const input = document.getElementById('noteInput');
+    input.value += (input.value.trim() ? '\n' : '') + '• ';
+  }
 
-    function saveEdit() {
-      if (currentEditingNote) {
-        const newText = document.getElementById('editTextarea').value.trim();
-        if (newText !== "") {
-          currentEditingNote.textElement.innerText = newText;
-          currentEditingNote.textElement.style.color = currentEditColor;
-          
-          // Update data note
-          currentEditingNote.data.color = currentEditColor;
-          
-          // Update border kiri dengan warna baru
-          currentEditingNote.element.style.borderLeftColor = currentEditColor;
-          
-          saveNotes();
-          closeEditModal();
-          
-          currentEditingNote.element.style.animation = 'none';
-          setTimeout(() => {
-            currentEditingNote.element.style.animation = 'pulse 0.6s ease';
-          }, 10);
-          
-          // Check achievement warna
-          checkAchievements();
-        } else {
-          alert("Catatan tidak boleh kosong!");
-        }
-      }
-    }
+  function changeMotivation() {
+    const idx = Math.floor(Math.random() * motivations.length);
+    document.getElementById('motivationText').textContent = motivations[idx];
+  }
 
-    function openDeleteModal(noteElement) {
-      currentDeletingNote = noteElement;
-      document.getElementById('deleteModal').classList.add('active');
-    }
+  function showDailyQuote() {
+    const q = quotes[Math.floor(Math.random() * quotes.length)];
+    document.getElementById('dailyQuote').textContent = `"${q.text}"`;
+    document.getElementById('quoteAuthor').textContent = '— ' + q.author;
+  }
 
-    function closeDeleteModal() {
-      document.getElementById('deleteModal').classList.remove('active');
-      currentDeletingNote = null;
-    }
-
-    function confirmDelete() {
-      if (currentDeletingNote) {
-        currentDeletingNote.classList.add('deleting');
-        
-        setTimeout(() => {
-          currentDeletingNote.remove();
-          saveNotes();
-          updateStats();
-          updateNotesCount();
-          closeDeleteModal();
-        }, 400);
-      }
-    }
-
-    // Close modal when clicking outside
-    document.addEventListener('click', function(e) {
-      if (e.target.classList.contains('modal-overlay')) {
-        closeEditModal();
-        closeDeleteModal();
-      }
-    });
-
-    // Close modal with Escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        closeEditModal();
-        closeDeleteModal();
-      }
-    });
-
-    // Simpan semua catatan ke localStorage
-    function saveNotes() {
-      let notes = [];
-      document.querySelectorAll(".note").forEach(note => {
-        const textElement = note.querySelector(".note-text");
-        const text = textElement.innerText;
-        const date = note.querySelector(".note-date").innerText;
-        const pinned = note.classList.contains('pinned');
-        const color = textElement.style.color || '#6366f1';
-        
-        // Find original data to preserve timestamp
-        const originalNotes = JSON.parse(localStorage.getItem("notes")) || [];
-        const originalNote = originalNotes.find(n => n.date === date && n.text === text);
-        
-        notes.push({
-          text,
-          date,
-          pinned,
-          color,
-          timestamp: originalNote ? originalNote.timestamp : new Date().toISOString()
-        });
-      });
-      
-      // Sort by pinned first, then by timestamp
-      notes.sort((a, b) => {
-        if (a.pinned && !b.pinned) return -1;
-        if (!a.pinned && b.pinned) return 1;
-        return new Date(b.timestamp) - new Date(a.timestamp);
-      });
-      
-      localStorage.setItem("notes", JSON.stringify(notes));
-    }
-
-    function updateNotesCount() {
-      const visibleNotes = document.querySelectorAll('.note[style*="display: block"], .note:not([style*="display"])');
-      const count = visibleNotes.length;
-      const notesCount = document.getElementById("notesCount");
-      notesCount.textContent = `${count} catatan`;
-      
-      const notesList = document.getElementById("notesList");
-      if (count === 0 && !notesList.querySelector('.empty-state')) {
-        notesList.innerHTML = `
-          <div class="empty-state">
-            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8 14V16M12 14V16M16 14V16M3 10H21V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 21.4142C3.21071 21.0391 3 19.5304 3 19V10Z" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M3 10V6C3 5.46957 3.21071 4.96086 3.58579 4.58579C3.96086 4.21071 4.46957 4 5 4H19C19.5304 4 20.0391 4.21071 20.4142 4.58579C20.7893 4.96086 21 5.46957 21 6V10" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M7 2V4" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M17 2V4" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <h3>Belum ada catatan</h3>
-            <p>Mulai dengan menambahkan catatan pertama Anda</p>
-          </div>
-        `;
-      } else if (count > 0 && notesList.querySelector('.empty-state')) {
-        notesList.innerHTML = '';
-        const savedNotes = JSON.parse(localStorage.getItem("notes")) || [];
-        savedNotes.forEach(note => createNoteElement(note));
-        filterNotes(currentFilter);
-      }
-    }
-
-    // Add pulse animation for edit success
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.02); }
-        100% { transform: scale(1); }
-      }
-    `;
-    document.head.appendChild(style);
-  </script>
+  // Close modal overlay
+  document.addEventListener('click', e => {
+    if (e.target.classList.contains('modal-overlay')) { closeEditModal(); closeDeleteModal(); }
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeEditModal(); closeDeleteModal(); }
+  });
+</script>
 </body>
 </html>
